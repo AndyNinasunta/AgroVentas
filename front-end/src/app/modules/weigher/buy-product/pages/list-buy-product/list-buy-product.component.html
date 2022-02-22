@@ -1,0 +1,249 @@
+<!-- Loader -->
+<div class="absolute inset-x-0 top-0" *ngIf="true">
+    <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+</div>
+
+<div class="flex flex-col flex-auto w-full">
+    <div class="flex flex-wrap w-full max-w-screen-xl mx-auto px-6 py-6 ">
+
+        <div class="grid grid-cols-1 gap-8 w-full">
+            <div class="flex flex-col flex-auto bg-card shadow-xl shadow-esmeraldDark rounded-2xl overflow-hidden">
+                <div class="overflow-x-auto">
+
+                    <!-- Header Module -->
+                    <div class="flex-auto sm:flex items-center sm:justify-between pt-4 px-5">
+                        <div
+                            class="text-center text-2xl text-greenEsmeraldLight tracking-tight leading-6 py-4 font-bold text-bvgPrimary">
+                            Compra
+                        </div>
+                        <div class="text-center px-4 sm:space-x-8 mt-4 sm:m-0">
+                            <button mat-button class=" bg-esmerald text-white text-base ">
+
+                                <mat-icon class="text-white fill-red-500 icon-size-6 "
+                                    [svgIcon]="'heroicons_outline:plus-sm'"></mat-icon>
+                                <span class="">Nueva Compra</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Body Module -->
+
+                </div>
+
+
+                <div class="flex flex-col flex-auto sm:overflow-auto-1 sm:px-6">
+
+                    <ng-container>
+
+                        <!-- Pasarlo a un componente compartido -->
+
+                        <div>
+                            <div class="header-table h-10 bg-bvgPrimary">
+
+                                <!-- <div class="flex justify-center">
+                                <button type="button" mat-icon-button >
+                                    <mat-icon class="mx-2 text-white " title="Agregar"
+                                        [svgIcon]="'heroicons_outline:plus'">
+                                    </mat-icon>
+                                </button>
+                            </div> -->
+
+                            </div>
+                            <div class="overflow-x-auto overflow-y-hidden">
+                                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+
+                                    <ng-container matColumnDef="acciones">
+                                        <th mat-header-cell *matHeaderCellDef
+                                            class="px-2 text-white font-bold text-base text-center">
+                                            Opciones
+                                        </th>
+
+                                        <td class="p-2 text-center" mat-cell *matCellDef="let element; let i =index"
+                                            [data-label]="'Código'">
+                                            <!-- heroicons_outline:plus -->
+                                            <button type="button">
+                                                <mat-icon class="mx-2 text-white hover:text-red-600" title="Eliminar"
+                                                    [svgIcon]="'heroicons_outline:trash'">
+                                                </mat-icon>
+                                            </button>
+
+                                            <button type="button" mat-icon-button>
+                                                <mat-icon class="mx-2 text-white " title="Editar"
+                                                    [svgIcon]="'heroicons_outline:pencil'">
+                                                </mat-icon>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="id">
+                                        <th mat-header-cell *matHeaderCellDef
+                                            class="px-2 text-white font-bold text-base text-center">
+                                            Id
+                                        </th>
+                                        <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'id'">
+
+                                            <div class="flex  my-2  sm:justify-center j-between">
+
+                                                <!-- <span
+                                                    class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
+                                                <p class="truncate-text text-base text-white text-center "
+                                                    matTooltip="{{element.id}}">
+                                                    {{element.id}}
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="producto">
+                                        <th mat-header-cell *matHeaderCellDef
+                                            class="px-2 text-white font-bold text-base text-center">
+                                            Producto
+                                        </th>
+                                        <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'id'">
+
+                                            <div class="flex  my-2  sm:justify-center j-between">
+
+                                                <!-- <span
+                                                    class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
+                                                <p class="truncate-text text-base text-white text-center "
+                                                    matTooltip="{{element.producto}}">
+                                                    {{element.producto}}
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="variedad">
+                                        <th mat-header-cell *matHeaderCellDef
+                                            class="px-2 text-white font-bold text-base text-center">
+                                            Variedad
+                                        </th>
+                                        <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'id'">
+
+                                            <div class="flex  my-2  sm:justify-center j-between">
+
+                                                <!-- <span
+                                                    class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
+                                                <p class="truncate-text text-base text-white text-center "
+                                                    matTooltip="{{element.variedad}}">
+                                                    {{element.variedad}}
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="detalle">
+                                        <th mat-header-cell *matHeaderCellDef
+                                            class="px-2 text-white font-bold text-base text-center">
+                                            Detalle
+                                        </th>
+                                        <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'id'">
+
+                                            <div class="flex  my-2  sm:justify-center j-between">
+
+                                                <!-- <span
+                                                    class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
+                                                <p class="truncate-text text-base text-white text-center "
+                                                    matTooltip="{{element.detalle}}">
+                                                    {{element.detalle}}
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="cantidad">
+                                        <th mat-header-cell *matHeaderCellDef
+                                            class="px-2 text-white font-bold text-base text-center">
+                                            Cantidad
+                                        </th>
+                                        <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'id'">
+
+                                            <div class="flex  my-2  sm:justify-center j-between">
+
+                                                <!-- <span
+                                                    class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
+                                                <p class="truncate-text text-base text-white text-center "
+                                                    matTooltip="{{element.cantidad}}">
+                                                    {{element.cantidad}}
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="tara">
+                                        <th mat-header-cell *matHeaderCellDef
+                                            class="px-2 text-white font-bold text-base text-center">
+                                            Tara
+                                        </th>
+                                        <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'tara'">
+
+                                            <div class="flex  my-2  sm:justify-center j-between">
+
+                                                <!-- <span
+                                                    class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
+                                                <p class="truncate-text text-base text-white text-center "
+                                                    matTooltip="{{element.tara}}">
+                                                    {{element.tara}}
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="libra_tara">
+                                        <th mat-header-cell *matHeaderCellDef
+                                            class="px-2 text-white font-bold text-base text-center">
+                                            Libra de Tara
+                                        </th>
+                                        <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'libra_tara'">
+
+                                            <div class="flex  my-2  sm:justify-center j-between">
+
+                                                <!-- <span
+                                                    class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
+                                                <p class="truncate-text text-base text-white text-center "
+                                                    matTooltip="{{element.libra_tara}}">
+                                                    {{element.libra_tara}}
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+
+
+
+                                    <tr mat-header-row *matHeaderRowDef="buyColumns"
+                                        class="px-6 align-middle border border-solid text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-greenEsmeraldLight  border-greemEsmeraldDark ">
+                                    </tr>
+
+                                    <tr mat-row *matRowDef="let row; columns: buyColumns;let i = index;"
+                                        class="bg-esmeraldDark" [ngClass]="{'bg-esmeraldLight': (i%2) !== 0}"></tr>
+
+
+                                    <!-- There is no data -->
+                                    <tr class="mat-row" *matNoDataRow>
+                                        <td class="mat-cell text-lg font-bold" colspan="99999">
+                                            No se encontró ningun registro.
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <mat-paginator #paginator
+                                class="bg-transparent  col-span-1 sm:col-span-2  md:col-span-4  flex  justify-center sm:justify-end"
+                                [pageSizeOptions]="[10,20,40,100]">
+                            </mat-paginator>
+
+
+                        </div>
+
+                        <!-- Pasarlo -->
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

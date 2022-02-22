@@ -1,0 +1,80 @@
+<div class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0">
+    <div
+        class="md:flex md:items-center md:justify-end w-full sm:w-auto md:h-full md:w-1/2 py-8 px-4 sm:p-12 md:p-16 sm:rounded-2xl md:rounded-none sm:shadow md:shadow-none sm:bg-card">
+        <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
+            <!-- Logo -->
+            <div class="w-12">
+                <img src="assets/images/logo/logo.svg">
+            </div>
+
+            <!-- Title -->
+            <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">Iniciar Sesión</div>
+
+
+            <!-- Alert -->
+            <fuse-alert class="mt-8 -mb-4" *ngIf="showAlert" [appearance]="'outline'" [showIcon]="false"
+                [type]="alert.type" [@shake]="alert.type === 'error'">
+                {{alert.message}}
+            </fuse-alert>
+
+            <!-- Sign in form -->
+            <form class="mt-8" [formGroup]="signInForm" #signInNgForm="ngForm">
+
+                <!-- userName field -->
+                <mat-form-field class="w-full">
+                    <mat-label>Usuario</mat-label>
+                    <input id="userName" matInput [formControlName]="'userName'">
+                    <mat-error *ngIf="signInForm.get('userName').hasError('required')">
+                        El correo es requerido.
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Password field -->
+                <mat-form-field class="w-full">
+                    <mat-label>Contraseña</mat-label>
+                    <input id="password" matInput type="password" [formControlName]="'password'" #passwordField>
+                    <button mat-icon-button type="button"
+                        (click)="passwordField.type === 'password' ? passwordField.type = 'text' : passwordField.type = 'password'"
+                        matSuffix>
+                        <mat-icon class="icon-size-5 text-esmeraldDark" *ngIf="passwordField.type === 'password'"
+                            [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                        <mat-icon class="icon-size-5 text-esmeraldLight" *ngIf="passwordField.type === 'text'"
+                            [svgIcon]="'heroicons_solid:eye-off'"></mat-icon>
+                    </button>
+                    <mat-error>
+                        La contraseña es requerida
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Submit button -->
+                <button class="fuse-mat-button-large w-full mt-6" mat-flat-button [color]="'primary'"
+                    [disabled]="signInForm.disabled" (click)="signIn()">
+                    <span *ngIf="!signInForm.disabled">
+                        Sign in
+                    </span>
+                    <mat-progress-spinner *ngIf="signInForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+                    </mat-progress-spinner>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div
+        class="relative hidden md:flex flex-auto items-center justify-center w-1/2 h-full p-16 lg:px-28 overflow-hidden bg-gray-800 dark:border-l">
+
+        <img class="absolute inset-0 pointer-events-none w-full h-full" src="assets/images/cacao-login.jpg">
+
+        <!-- @formatter:on -->
+        <!-- Content -->
+        <div class="z-10 relative w-full max-w-2xl">
+            <div class="text-7xl font-bold leading-none text-gray-100">
+                <div class="text-esmeraldLight">Bienvenido a</div>
+                <div class="text-esmerald">AgroVentas</div>
+            </div>
+            <div class="mt-6 text-lg tracking-tight text-white leading-6 ">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Nunc sit amet tortor ultricies augue aliquet sagittis. Aliquam erat volutpat.
+                Aliquam sodales tortor ut sapien vulputate, sed malesuada magna tincidunt.
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,7 +2,7 @@
     <div class="w-full max-w-2xl h-full md:h-auto">
         <!-- Content-->
         <div class=" bg-white rounded-lg shadow ">
-            <form [formGroup]="userForm" #f="ngForm" (ngSubmit)="searchUser()">
+            <form [formGroup]="userForm" (ngSubmit)="searchUser()">
                 <!-- Header -->
                 <div
                     class="flex justify-center items-start p-5 rounded-t border-b-4 bg-esmerald  border-greenEsmeraldDark">
@@ -47,9 +47,6 @@
                         </mat-progress-spinner>
 
                     </button>
-
-
-
                 </div>
             </form>
         </div>

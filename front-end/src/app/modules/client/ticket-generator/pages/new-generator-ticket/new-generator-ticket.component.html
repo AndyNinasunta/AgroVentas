@@ -1,1 +1,184 @@
-<p>new-generator-ticket works!</p>
+<div class="flex w-full justify-center">
+    <div *ngIf="user" class="flex flex-col flex-auto w-full max-w-110 justify-center">
+        <div class="flex flex-wrap w-full max-w-screen-xl  mx-auto px-6 py-6 ">
+
+            <div class="grid grid-cols-1 gap-8 w-full">
+                <div class="flex flex-col flex-auto bg-card shadow-xl shadow-esmeraldDark rounded-2xl overflow-hidden">
+                    <form [formGroup]="userForm" (ngSubmit)="generateTicket()">
+                        <div class="overflow-x-auto">
+
+                            <!-- Header Module -->
+                            <div class="flex-auto sm:flex items-center sm:justify-between pt-4 px-5">
+                                <div
+                                    class="text-center text-2xl text-greenEsmeraldLight tracking-tight leading-6 py-4 font-bold">
+                                    Cliente
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row   w-full justify-start ">
+                                <div class="sm:w-auto">
+                                    <div class="grid grid-cols-1 w-full">
+                                        <div class="grid grid-cols-1   sm:grid-cols-2 gap-x-2 px-10 pt-4 ">
+
+
+
+                                            <div class="flex w-full sm:w-60">
+                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark ">
+                                                        Ruc / Cédula *
+                                                    </mat-label>
+
+                                                    <input [formControlName]="'identification'" matInput
+                                                        [placeholder]="'RUC / CÉDULA'" type="text" />
+                                                    <mat-icon matPrefix [svgIcon]="'heroicons_outline:identification'">
+                                                    </mat-icon>
+                                                    <mat-error *ngIf="this.userForm.get('identification').invalid ">
+                                                        {{
+                                                        this.formGroupError.getErrorValidateMessage(userForm,
+                                                        'identification')}}
+                                                    </mat-error>
+
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="w-full sm:w-60">
+                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark ">
+                                                        Nombre *
+                                                    </mat-label>
+
+                                                    <input [formControlName]="'fullName'" matInput
+                                                        [placeholder]="'Nombre'" type="text" />
+                                                    <mat-icon matPrefix [svgIcon]="'heroicons_outline:user'">
+                                                    </mat-icon>
+                                                    <mat-error *ngIf="this.userForm.get('fullName').invalid ">
+                                                        {{
+                                                        this.formGroupError.getErrorValidateMessage(userForm,
+                                                        'fullName')}}
+                                                    </mat-error>
+
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="w-full sm:w-60">
+                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark ">
+                                                        Email *
+                                                    </mat-label>
+
+                                                    <input [formControlName]="'email'" matInput [placeholder]="'Email'"
+                                                        type="text" />
+                                                    <mat-icon matPrefix [svgIcon]="'email'">
+                                                    </mat-icon>
+                                                    <mat-error *ngIf="this.userForm.get('email').invalid ">
+                                                        {{
+                                                        this.formGroupError.getErrorValidateMessage(userForm,
+                                                        'email')}}
+                                                    </mat-error>
+
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="w-full sm:w-60">
+                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark ">
+                                                        Teléfono *
+                                                    </mat-label>
+
+                                                    <input [formControlName]="'phoneNumber'" matInput
+                                                        [placeholder]="'Teléfono'" type="text" />
+                                                    <mat-icon matPrefix [svgIcon]="'heroicons_outline:phone'">
+                                                    </mat-icon>
+                                                    <mat-error *ngIf="this.userForm.get('phoneNumber').invalid ">
+                                                        {{
+                                                        this.formGroupError.getErrorValidateMessage(userForm,
+                                                        'phoneNumber')}}
+                                                    </mat-error>
+
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class=" w-full  sm:col-span-2">
+                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark ">
+                                                        Dirección *
+                                                    </mat-label>
+
+                                                    <textarea [formControlName]="'direction'" matInput
+                                                        [placeholder]="'Dirección'" type="text"></textarea>
+                                                    <mat-icon matPrefix [svgIcon]="'location_on'">
+                                                    </mat-icon>
+                                                    <mat-error *ngIf="this.userForm.get('direction').invalid ">
+                                                        {{
+                                                        this.formGroupError.getErrorValidateMessage(userForm,
+                                                        'direction')}}
+                                                    </mat-error>
+
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="flex-auto sm:flex items-center sm:justify-between pt-4 px-5">
+                                <div
+                                    class="text-center text-2xl text-greenEsmeraldLight tracking-tight leading-6 py-4 font-bold">
+                                    Detalle
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row   w-full justify-start ">
+                                <div class="sm:w-auto">
+                                    <div class="grid grid-cols-1 w-full">
+                                        <div class="grid grid-cols-1  gap-x-2 px-10 pt-4 ">
+
+                                            <div class="w-full sm:w-80">
+                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark ">
+                                                        Cantidad de Productos (Sacos)
+                                                    </mat-label>
+
+                                                    <input [formControlName]="'quantityProducts'" matInput
+                                                        [placeholder]="'Cantidad de Productos (Sacos)'" type="number" />
+                                                    <mat-icon matPrefix [svgIcon]="'iconsmind:cart_quantity'">
+                                                    </mat-icon>
+                                                    <mat-error *ngIf="this.userForm.get('quantityProducts').invalid ">
+                                                        {{
+                                                        this.formGroupError.getErrorValidateMessage(userForm,
+                                                        'quantityProducts')}}
+                                                    </mat-error>
+
+                                                </mat-form-field>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Body Module -->
+
+                            <div class="flex justify-center items-center p-6 space-x-2 rounded-b ">
+                                <button mat-flat-button type="submit" [disabled]="this.userForm.invalid"
+                                    [color]="'primary'">
+                                    <ng-container *ngIf="!isLoading">
+                                        <mat-icon class="mr-1" svgIcon="heroicons_outline:ticket"></mat-icon>
+                                        <span>Generar Ticket
+                                        </span>
+                                    </ng-container>
+                                    <mat-progress-spinner *ngIf="isLoading" [diameter]="24" [mode]="'indeterminate'">
+                                    </mat-progress-spinner>
+
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

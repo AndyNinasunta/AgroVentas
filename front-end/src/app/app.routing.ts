@@ -33,7 +33,7 @@ export const appRoutes: Route[] = [
             { path: 'reset-password', loadChildren: () => import('app/modules/auth/reset-password/reset-password.module').then(m => m.AuthResetPasswordModule) },
             { path: 'sign-in', loadChildren: () => import('app/modules/auth/sign-in/sign-in.module').then(m => m.AuthSignInModule) },
             { path: 'sign-up', loadChildren: () => import('app/modules/auth/sign-up/sign-up.module').then(m => m.AuthSignUpModule) },
-            { path: 'ticket', loadChildren: () => import('app/modules/client/ticket-generator/ticket-generator.module').then(m => m.TicketGeneratorModule) }
+
         ]
     },
 
@@ -60,6 +60,7 @@ export const appRoutes: Route[] = [
             layout: 'empty'
         },
         children: [
+            { path: 'ticket', loadChildren: () => import('app/modules/client/ticket-generator/ticket-generator.module').then(m => m.TicketGeneratorModule) }
             // { path: 'home', loadChildren: () => import('app/modules/landing/home/home.module').then(m => m.LandingHomeModule) },
         ]
     },
@@ -78,17 +79,17 @@ export const appRoutes: Route[] = [
             {
                 path: 'weigher', children: [
                     { path: 'buy-product', loadChildren: () => import('app/modules/weigher/buy-product/buy-product.module').then(m => m.BuyProductModule) },
-                    
+
                 ]
             },
             {
                 path: 'cash-register', children: [
-                    
+
                 ]
             },
             {
                 path: 'client', children: [
-                    
+
                 ]
             },
 

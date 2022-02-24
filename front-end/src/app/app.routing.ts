@@ -7,7 +7,6 @@ import { InitialDataResolver } from 'app/app.resolvers';
 // @formatter:off
 // tslint:disable:max-line-length
 export const appRoutes: Route[] = [
-
     // Redirect empty path to '/example'
     { path: '', pathMatch: 'full', redirectTo: '/home' },
 
@@ -25,16 +24,52 @@ export const appRoutes: Route[] = [
         canActivateChild: [NoAuthGuard],
         component: LayoutComponent,
         data: {
-            layout: 'empty'
+            layout: 'empty',
         },
         children: [
-            { path: 'confirmation-required', loadChildren: () => import('app/modules/auth/confirmation-required/confirmation-required.module').then(m => m.AuthConfirmationRequiredModule) },
-            { path: 'forgot-password', loadChildren: () => import('app/modules/auth/forgot-password/forgot-password.module').then(m => m.AuthForgotPasswordModule) },
-            { path: 'reset-password', loadChildren: () => import('app/modules/auth/reset-password/reset-password.module').then(m => m.AuthResetPasswordModule) },
-            { path: 'sign-in', loadChildren: () => import('app/modules/auth/sign-in/sign-in.module').then(m => m.AuthSignInModule) },
-            { path: 'sign-up', loadChildren: () => import('app/modules/auth/sign-up/sign-up.module').then(m => m.AuthSignUpModule) },
-            { path: 'ticket', loadChildren: () => import('app/modules/client/ticket-generator/ticket-generator.module').then(m => m.TicketGeneratorModule) }
-        ]
+            {
+                path: 'confirmation-required',
+                loadChildren: () =>
+                    import(
+                        'app/modules/auth/confirmation-required/confirmation-required.module'
+                    ).then((m) => m.AuthConfirmationRequiredModule),
+            },
+            {
+                path: 'forgot-password',
+                loadChildren: () =>
+                    import(
+                        'app/modules/auth/forgot-password/forgot-password.module'
+                    ).then((m) => m.AuthForgotPasswordModule),
+            },
+            {
+                path: 'reset-password',
+                loadChildren: () =>
+                    import(
+                        'app/modules/auth/reset-password/reset-password.module'
+                    ).then((m) => m.AuthResetPasswordModule),
+            },
+            {
+                path: 'sign-in',
+                loadChildren: () =>
+                    import('app/modules/auth/sign-in/sign-in.module').then(
+                        (m) => m.AuthSignInModule
+                    ),
+            },
+            {
+                path: 'sign-up',
+                loadChildren: () =>
+                    import('app/modules/auth/sign-up/sign-up.module').then(
+                        (m) => m.AuthSignUpModule
+                    ),
+            },
+            {
+                path: 'ticket',
+                loadChildren: () =>
+                    import(
+                        'app/modules/client/ticket-generator/ticket-generator.module'
+                    ).then((m) => m.TicketGeneratorModule),
+            },
+        ],
     },
 
     // Auth routes for authenticated users
@@ -44,12 +79,24 @@ export const appRoutes: Route[] = [
         canActivateChild: [AuthGuard],
         component: LayoutComponent,
         data: {
-            layout: 'empty'
+            layout: 'empty',
         },
         children: [
-            { path: 'sign-out', loadChildren: () => import('app/modules/auth/sign-out/sign-out.module').then(m => m.AuthSignOutModule) },
-            { path: 'unlock-session', loadChildren: () => import('app/modules/auth/unlock-session/unlock-session.module').then(m => m.AuthUnlockSessionModule) }
-        ]
+            {
+                path: 'sign-out',
+                loadChildren: () =>
+                    import('app/modules/auth/sign-out/sign-out.module').then(
+                        (m) => m.AuthSignOutModule
+                    ),
+            },
+            {
+                path: 'unlock-session',
+                loadChildren: () =>
+                    import(
+                        'app/modules/auth/unlock-session/unlock-session.module'
+                    ).then((m) => m.AuthUnlockSessionModule),
+            },
+        ],
     },
 
     // Landing routes
@@ -57,11 +104,11 @@ export const appRoutes: Route[] = [
         path: '',
         component: LayoutComponent,
         data: {
-            layout: 'empty'
+            layout: 'empty',
         },
         children: [
             // { path: 'home', loadChildren: () => import('app/modules/landing/home/home.module').then(m => m.LandingHomeModule) },
-        ]
+        ],
     },
 
     // Admin routes
@@ -74,24 +121,33 @@ export const appRoutes: Route[] = [
             initialData: InitialDataResolver,
         },
         children: [
-            { path: 'home', loadChildren: () => import('app/modules/admin/home/home.module').then(m => m.HomeModule) },
             {
-                path: 'weigher', children: [
-                    { path: 'buy-product', loadChildren: () => import('app/modules/weigher/buy-product/buy-product.module').then(m => m.BuyProductModule) },
-                    
-                ]
+                path: 'home',
+                loadChildren: () =>
+                    import('app/modules/admin/home/home.module').then(
+                        (m) => m.HomeModule
+                    ),
             },
             {
-                path: 'cash-register', children: [
-                    
-                ]
+                path: 'weigher',
+                children: [
+                    {
+                        path: 'tickets',
+                        loadChildren: () =>
+                            import('app/modules/weigher/weigher.module').then(
+                                (m) => m.WeigherModule
+                            ),
+                    },
+                ],
             },
             {
-                path: 'client', children: [
-                    
-                ]
+                path: 'cash-register',
+                children: [],
             },
-
-        ]
-    }
+            {
+                path: 'client',
+                children: [],
+            },
+        ],
+    },
 ];

@@ -86,7 +86,7 @@ import {MatListModule} from '@angular/material/list';
         MatCardModule,
         MatRadioModule,
         MatStepperModule,
-        MatListModule
+        MatListModule,
     ]
 })
 export class SharedModule

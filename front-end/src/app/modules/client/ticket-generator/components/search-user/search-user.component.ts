@@ -1,5 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { FormGroupError } from 'app/shared/class/validator-functions';
+import { ValidCI, ValidRUC } from 'app/shared/validators/identification.validator';
 
 @Component({
   selector: 'app-search-user',
@@ -9,26 +12,40 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class SearchUserComponent implements OnInit {
 
 
-  isLoading:boolean=false;
+  isLoading: boolean = false;
+  formGroupError = new FormGroupError();
+
+  userForm: FormGroup=this.createUserForm();
+  // identification: FormControl = new FormControl('', [ValidCI, ValidRUC, Validators.required]);
+
 
 
   /**
    * Constructor
    * @param dialogRef 
    */
-  constructor(public dialogRef: MatDialogRef<SearchUserComponent>) { }
+  constructor(public dialogRef: MatDialogRef<SearchUserComponent>,private fBuilder: FormBuilder,) { }
 
 
   ngOnInit(): void {
-    console.log('hola');
+  }
+
+
+  createUserForm(): FormGroup {
+    return this.fBuilder.group({
+      identification: [''
+        ,
+        [ValidCI,Validators.required],
+      ]
+    });
   }
 
 
   /**
    * Search User
    */
-  searchUser(){
-    this.isLoading=true;
+  searchUser() {
+    this.isLoading = true;
   }
 
 }

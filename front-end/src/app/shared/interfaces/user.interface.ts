@@ -1,6 +1,14 @@
+
+export interface ApiResponseUserI {
+    status:string;
+    message:string;
+    data:UserI;
+}
+
 export interface UserI {
     idUser?:number;
-    identificationNumber:string;
+    isExist?:boolean;
+    identification:string;
     fullName:string;
     email:string;
     direction:string;

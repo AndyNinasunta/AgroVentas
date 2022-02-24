@@ -1,51 +1,105 @@
-<div class="overflow-y-auto overflow-x-hidden max-h-screen  justify-center items-center  md:h-full  -m-6">
+<div
+    class="overflow-y-auto overflow-x-hidden max-h-screen justify-center items-center md:h-full -m-6"
+>
     <div class="w-full max-w-2xl h-full md:h-auto">
         <!-- Content-->
-        <div class=" bg-white rounded-lg shadow ">
-            <!-- Header -->
-            <div class="flex justify-center items-start p-5 rounded-t border-b-4 bg-esmerald  border-greenEsmeraldDark">
-                <h3 class="text-xl  font-semibold text-white lg:text-2xl ">
-                    Buscar Cliente
-                </h3>
-            </div>
-            <!-- Body -->
-            <div class="p-6 pb-2 space-y-6">
-                <p class="text-base leading-relaxed text-gray-500">
-                    Por favor Ingrese sú número de identificación.
-                </p>
-
-                <div class="w-full ">
-                    <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
-                        <mat-label class="mb-2 text-base font-medium text-esmeraldDark ">
-                            Ruc / Cédula
-                        </mat-label>
-
-                        <input [formControl]="'numberIdentification'" matInput [placeholder]="'RUC / CÉDULA'"
-                            type="text" />
-                        <mat-icon matPrefix 
-                        [svgIcon]="'heroicons_outline:identification'"></mat-icon>
-
-
-                    </mat-form-field>
+        <div class="bg-white rounded-lg shadow">
+            <form [formGroup]="userForm" (ngSubmit)="searchUser()">
+                <!-- Header -->
+                <div
+                    class="flex justify-center items-start p-5 rounded-t border-b-4 bg-esmerald border-greenEsmeraldDark"
+                >
+                    <h3 class="text-xl font-semibold text-white lg:text-2xl">
+                        Buscar Cliente
+                    </h3>
                 </div>
+                <!-- Body -->
+                <div class="p-6 pb-2 space-y-6">
+                    <p class="text-base leading-relaxed text-gray-500">
+                        Por favor Ingrese sú número de identificación.
+                    </p>
 
-            </div>
-            <!-- Footer -->
-            <div class="flex justify-center items-center p-6 space-x-2 rounded-b ">
-                <button mat-flat-button type="button" [color]="'primary'" (click)="searchUser()">
-                    <ng-container *ngIf="!isLoading">
-                        <mat-icon class="mr-1" svgIcon="heroicons_outline:badge-check"></mat-icon>
-                        <span>Verificar Usuario
-                        </span>
-                    </ng-container>
-                    <mat-progress-spinner *ngIf="isLoading" [diameter]="24" [mode]="'indeterminate'">
-                    </mat-progress-spinner>
+                    <div class="w-full">
+                        <mat-form-field
+                            class="flex-auto w-full px-2 fuse-mat-dense"
+                        >
+                            <mat-label
+                                class="mb-2 text-base font-medium text-esmeraldDark"
+                            >
+                                Ruc / Cédula
+                            </mat-label>
 
-                </button>
-
-
-
-            </div>
+                            <input
+                                [formControlName]="'identification'"
+                                matInput
+                                [placeholder]="'RUC / CÉDULA'"
+                                type="text"
+                            />
+                            <mat-icon
+                                matPrefix
+                                [svgIcon]="'heroicons_outline:identification'"
+                            ></mat-icon>
+                            <mat-error
+                                *ngIf="
+                                    this.userForm.get('identification').invalid
+                                "
+                            >
+                                {{
+                                    this.formGroupError.getErrorValidateMessage(
+                                        userForm,
+                                        "identification"
+                                    )
+                                }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- Footer -->
+                <div
+                    class="flex justify-center items-center p-6 space-x-2 rounded-b"
+                >
+                    <button
+                        mat-flat-button
+                        type="submit"
+                        [disabled]="this.userForm.get('identification').invalid"
+                        [color]="'primary'"
+                    >
+                        <ng-container *ngIf="!isLoading">
+                            <mat-icon
+                                class="mr-1"
+                                svgIcon="heroicons_outline:badge-check"
+                            ></mat-icon>
+                            <span>Verificar Usuario </span>
+                        </ng-container>
+                        <mat-progress-spinner
+                            *ngIf="isLoading"
+                            [diameter]="24"
+                            [mode]="'indeterminate'"
+                        >
+                        </mat-progress-spinner>
+                    </button>
+                    <button
+                        type="button"
+                        mat-flat-button
+                        [color]="'warn'"
+                        (click)="cancelTicket()"
+                    >
+                        <ng-container *ngIf="!isLoading">
+                            <mat-icon
+                                class="mr-1"
+                                svgIcon="heroicons_outline:rewind"
+                            ></mat-icon>
+                            <span>Cancelar </span>
+                        </ng-container>
+                        <mat-progress-spinner
+                            *ngIf="isLoading"
+                            [diameter]="24"
+                            [mode]="'indeterminate'"
+                        >
+                        </mat-progress-spinner>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

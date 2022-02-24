@@ -62,13 +62,6 @@ export const appRoutes: Route[] = [
                         (m) => m.AuthSignUpModule
                     ),
             },
-            {
-                path: 'ticket',
-                loadChildren: () =>
-                    import(
-                        'app/modules/client/ticket-generator/ticket-generator.module'
-                    ).then((m) => m.TicketGeneratorModule),
-            },
         ],
     },
 
@@ -107,6 +100,13 @@ export const appRoutes: Route[] = [
             layout: 'empty',
         },
         children: [
+            {
+                path: 'ticket',
+                loadChildren: () =>
+                    import(
+                        'app/modules/client/ticket-generator/ticket-generator.module'
+                    ).then((m) => m.TicketGeneratorModule),
+            },
             // { path: 'home', loadChildren: () => import('app/modules/landing/home/home.module').then(m => m.LandingHomeModule) },
         ],
     },

@@ -17,9 +17,9 @@
                         <div
                             class="text-center text-2xl text-greenEsmeraldLight tracking-tight leading-6 py-4 font-bold text-bvgPrimary"
                         >
-                            Compra
+                            Cola de Tickets Generados
                         </div>
-                        <div class="text-center px-4 sm:space-x-8 mt-4 sm:m-0">
+                        <!-- <div class="text-center px-4 sm:space-x-8 mt-4 sm:m-0">
                             <button
                                 mat-button
                                 class="bg-esmerald text-white text-base"
@@ -30,7 +30,7 @@
                                 ></mat-icon>
                                 <span class="">Nueva Compra</span>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Body Module -->
@@ -78,7 +78,7 @@
                                             <button type="button">
                                                 <mat-icon
                                                     class="mx-2 text-white hover:text-red-600"
-                                                    title="Eliminar"
+                                                    title="Descartar"
                                                     [svgIcon]="
                                                         'heroicons_outline:trash'
                                                     "
@@ -89,12 +89,15 @@
                                             <button
                                                 type="button"
                                                 mat-icon-button
+                                                (click)="
+                                                    openAttentionWindow(element)
+                                                "
                                             >
                                                 <mat-icon
                                                     class="mx-2 text-white"
-                                                    title="Editar"
+                                                    title="Atender"
                                                     [svgIcon]="
-                                                        'heroicons_outline:pencil'
+                                                        'heroicons_outline:clipboard-check'
                                                     "
                                                 >
                                                 </mat-icon>
@@ -102,13 +105,13 @@
                                         </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="id">
+                                    <ng-container matColumnDef="codTicket">
                                         <th
                                             mat-header-cell
                                             *matHeaderCellDef
                                             class="px-2 text-white font-bold text-base text-center"
                                         >
-                                            Id
+                                            COD. TICKET
                                         </th>
                                         <td
                                             class="px-2"
@@ -124,22 +127,22 @@
                                                 <p
                                                     class="truncate-text text-base text-white text-center"
                                                     matTooltip="{{
-                                                        element.id
+                                                        element.codTicket
                                                     }}"
                                                 >
-                                                    {{ element.id }}
+                                                    {{ element.codTicket }}
                                                 </p>
                                             </div>
                                         </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="producto">
+                                    <ng-container matColumnDef="fechaGen">
                                         <th
                                             mat-header-cell
                                             *matHeaderCellDef
                                             class="px-2 text-white font-bold text-base text-center"
                                         >
-                                            Producto
+                                            Fecha
                                         </th>
                                         <td
                                             class="px-2"
@@ -155,22 +158,22 @@
                                                 <p
                                                     class="truncate-text text-base text-white text-center"
                                                     matTooltip="{{
-                                                        element.producto
+                                                        element.fechaGen
                                                     }}"
                                                 >
-                                                    {{ element.producto }}
+                                                    {{ element.fechaGen }}
                                                 </p>
                                             </div>
                                         </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="variedad">
+                                    <ng-container matColumnDef="horaGen">
                                         <th
                                             mat-header-cell
                                             *matHeaderCellDef
                                             class="px-2 text-white font-bold text-base text-center"
                                         >
-                                            Variedad
+                                            Hora
                                         </th>
                                         <td
                                             class="px-2"
@@ -186,22 +189,22 @@
                                                 <p
                                                     class="truncate-text text-base text-white text-center"
                                                     matTooltip="{{
-                                                        element.variedad
+                                                        element.horaGen
                                                     }}"
                                                 >
-                                                    {{ element.variedad }}
+                                                    {{ element.horaGen }}
                                                 </p>
                                             </div>
                                         </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="detalle">
+                                    <ng-container matColumnDef="identCliente">
                                         <th
                                             mat-header-cell
                                             *matHeaderCellDef
                                             class="px-2 text-white font-bold text-base text-center"
                                         >
-                                            Detalle
+                                            ID. CLIENTE
                                         </th>
                                         <td
                                             class="px-2"
@@ -217,22 +220,22 @@
                                                 <p
                                                     class="truncate-text text-base text-white text-center"
                                                     matTooltip="{{
-                                                        element.detalle
+                                                        element.identCliente
                                                     }}"
                                                 >
-                                                    {{ element.detalle }}
+                                                    {{ element.identCliente }}
                                                 </p>
                                             </div>
                                         </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="cantidad">
+                                    <ng-container matColumnDef="nombresCliente">
                                         <th
                                             mat-header-cell
                                             *matHeaderCellDef
                                             class="px-2 text-white font-bold text-base text-center"
                                         >
-                                            Cantidad
+                                            NOMBS. CLIENTE
                                         </th>
                                         <td
                                             class="px-2"
@@ -248,22 +251,22 @@
                                                 <p
                                                     class="truncate-text text-base text-white text-center"
                                                     matTooltip="{{
-                                                        element.cantidad
+                                                        element.nombresCliente
                                                     }}"
                                                 >
-                                                    {{ element.cantidad }}
+                                                    {{ element.nombresCliente }}
                                                 </p>
                                             </div>
                                         </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="tara">
+                                    <ng-container matColumnDef="cantTentSacos">
                                         <th
                                             mat-header-cell
                                             *matHeaderCellDef
                                             class="px-2 text-white font-bold text-base text-center"
                                         >
-                                            Tara
+                                            CANT.
                                         </th>
                                         <td
                                             class="px-2"
@@ -279,41 +282,10 @@
                                                 <p
                                                     class="truncate-text text-base text-white text-center"
                                                     matTooltip="{{
-                                                        element.tara
+                                                        element.cantTentSacos
                                                     }}"
                                                 >
-                                                    {{ element.tara }}
-                                                </p>
-                                            </div>
-                                        </td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="libraTara">
-                                        <th
-                                            mat-header-cell
-                                            *matHeaderCellDef
-                                            class="px-2 text-white font-bold text-base text-center"
-                                        >
-                                            Libra de Tara
-                                        </th>
-                                        <td
-                                            class="px-2"
-                                            mat-cell
-                                            *matCellDef="let element"
-                                            [data-label]="'libraTara'"
-                                        >
-                                            <div
-                                                class="flex my-2 sm:justify-center j-between"
-                                            >
-                                                <!-- <span
-                                                    class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
-                                                <p
-                                                    class="truncate-text text-base text-white text-center"
-                                                    matTooltip="{{
-                                                        element.libraTara
-                                                    }}"
-                                                >
-                                                    {{ element.libraTara }}
+                                                    {{ element.cantTentSacos }}
                                                 </p>
                                             </div>
                                         </td>

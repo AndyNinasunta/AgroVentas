@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { TicketI } from '../../interfaces/weigher.interface';
 
 @Component({
@@ -18,7 +19,7 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
         'fechaGen',
         'horaGen',
         'identCliente',
-        'nomnreCliente',
+        'nombresCliente',
         'cantTentSacos',
     ];
 
@@ -41,7 +42,7 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
         },
     ];
 
-    constructor() {}
+    constructor(private router: Router) {}
 
     ngOnInit(): void {
         this.dataSource = new MatTableDataSource(this.tickets);
@@ -49,5 +50,11 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         this.dataSource.paginator = this.paginator;
+    }
+
+    openAttentionWindow(element: any): any {
+        this.router.navigate([
+            `weigher/tickets/attend-ticket/${element.codTicket}`,
+        ]);
     }
 }

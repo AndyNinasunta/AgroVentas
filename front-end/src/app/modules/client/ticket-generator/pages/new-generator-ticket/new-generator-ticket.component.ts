@@ -165,7 +165,7 @@ export class NewGeneratorTicketComponent implements OnInit {
                     alignment: 'center',
                 },
                 {
-                    text: ['1'],
+                    text: ['AB123'],
                     style: 'ticket',
                     bold: true,
                     alignment: 'center',

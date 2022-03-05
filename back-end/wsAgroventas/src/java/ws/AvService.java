@@ -57,6 +57,7 @@ public class AvService {
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
                 .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .header("Access-Control-Max-Age", "3600")
                 .build();        
     }
     
@@ -86,5 +87,65 @@ public class AvService {
                 .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
                 .build();
     }
-  
+    @GET
+    @Path("wTicket")
+    public Response wTicket(@QueryParam("Ruc") String Ruc){
+        String dataPac = pProc.prcTicket(Ruc);
+        return Response.ok(dataPac)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+    
+    @GET
+    @Path("wVariedades")
+    public Response wVariedades(){
+        String dataPac = pProc.cargarVariedad();
+        return Response.ok(dataPac)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+    
+    @GET
+    @Path("wEstados")
+    public Response wEstados(){
+        String dataPac = pProc.cargarEstado();
+        return Response.ok(dataPac)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+    
+    
+    @GET
+    @Path("wRecipientes")
+    public Response wRecipientes(){
+        String dataPac = pProc.cargarEstado();
+        return Response.ok(dataPac)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+    
+    @POST
+    @Path("wPesaje")
+    public Response wPesaje(@QueryParam("rcd") String rcd,@QueryParam("vid") int variedadid,
+            @QueryParam("sid") int estadoid,@QueryParam("clf") double calificacion, 
+            @QueryParam("prc")double precio,@QueryParam("pesid") int pesadorid,
+            @QueryParam("prd") int productoid,@QueryParam("det") String detalle, 
+            @QueryParam("cant") double cantidad, @QueryParam("rptid") int recipienteid, 
+            @QueryParam("precip") double pesorecipiente){
+        String dataPac = pProc.prcPesaje(rcd, variedadid, estadoid, calificacion, 
+                precio, pesadorid, productoid, detalle, cantidad, recipienteid, pesorecipiente);
+        return Response.ok(dataPac)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
 }

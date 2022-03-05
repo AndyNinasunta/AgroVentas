@@ -105,7 +105,7 @@ export class NewGeneratorTicketComponent implements OnInit {
             JSON.stringify(this.userForm.getRawValue())
         );
 
-        if (this.user.isExist) {
+        if (!this.user.isExist) {
             this._authService.registerUser(userAux).pipe(
                 takeUntil(this._unsubscribe),
                 timeout(2000),

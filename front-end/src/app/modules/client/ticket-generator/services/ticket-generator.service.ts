@@ -15,13 +15,13 @@ export class TicketGeneratorService {
   constructor(private http: HttpClient) { }
 
 
-  searchUser(numberIdentif: string): Observable<UserI> {
+  searchUser(numberIdentif: string): Observable<UserI[]> {
 
     let param = {
       Ruc: numberIdentif
     };
 
-    return this.http.get<UserI>(`/webresources/avService/wDataClientes`,
+    return this.http.get<UserI[]>(environment.urlAddress + `/avService/wDataClientes`,
       { params: param });
 
   }

@@ -30,7 +30,14 @@ export class SearchUserComponent implements OnInit {
 
     userForm: FormGroup = this.createUserForm();
 
-    user: UserI;
+    user: UserI = {
+        cliente:'',
+        direccion:'',
+        mail:'',
+        isExist:false,
+        ruc:'',
+        telefono:''
+    };
 
     private _unsubscribe: Subject<any> = new Subject<any>();
     // identification: FormControl = new FormControl('', [ValidCI, ValidRUC, Validators.required]);
@@ -44,9 +51,9 @@ export class SearchUserComponent implements OnInit {
         private fBuilder: FormBuilder,
         private _ticketService: TicketGeneratorService,
         private router: Router
-    ) {}
+    ) { }
 
-    ngOnInit(): void {}
+    ngOnInit(): void { }
 
     /**
      * Create Form
@@ -81,16 +88,6 @@ export class SearchUserComponent implements OnInit {
                 finalize(() => {
                     this.isLoading = false;
 
-                    // this.user = {
-                    //     idUser: 1,
-                    //     isExist: true,
-                    //     identification: identificationAux,
-                    //     fullName: 'Andy Ninasunta',
-                    //     direction: 'Parroquia NID',
-                    //     email: 'andy2000-09@hotmail.com',
-                    //     phoneNumber: '0982804639',
-                    // };
-
                     this.userResponse.emit(this.user);
 
                     this.dialogClose();
@@ -98,14 +95,15 @@ export class SearchUserComponent implements OnInit {
             )
             .subscribe(
                 (res) => {
-
-                    console.log(res);
-                    this.user=res;
-                    this.user.isExist=true;
+                    if (res[0]) {
+                        console.log(res);
+                        this.user = res[0];
+                        this.user.isExist = true;
+                    }
+                   
                     this.userResponse.emit(this.user);
-
                 },
-                (err) => {}
+                (err) => { }
             );
     }
 

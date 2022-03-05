@@ -83,11 +83,11 @@ export class NewGeneratorTicketComponent implements OnInit {
                     this.userForm.patchValue(this.user);
 
                     if (this.user.isExist) {
-                        this.userForm.get('identification').disable();
-                        this.userForm.get('fullName').disable();
-                        this.userForm.get('email').disable();
-                        this.userForm.get('direction').disable();
-                        this.userForm.get('phoneNumber').disable();
+                        this.userForm.get('ruc').disable();
+                        this.userForm.get('cliente').disable();
+                        this.userForm.get('mail').disable();
+                        this.userForm.get('direccion').disable();
+                        this.userForm.get('telefono').disable();
                     }
                 }
             });
@@ -117,7 +117,7 @@ export class NewGeneratorTicketComponent implements OnInit {
                 finalize(() => {
                     this.isLoading = false;
 
-                    this.generatedTicket(1, userAux);
+                    this.generatedTicket('AAA1', userAux);
                 })
             )
             .subscribe(
@@ -126,7 +126,7 @@ export class NewGeneratorTicketComponent implements OnInit {
             );
     }
 
-    generatedTicket(queue: number, user: UserI) {
+    generatedTicket(queue: string, user: UserI) {
         const now = new Date(Date.now());
 
         const formatoMap = {

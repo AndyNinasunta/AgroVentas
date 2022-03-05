@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { UserI } from 'app/shared/interfaces/user.interface';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
+import { TicketI } from '../interfaces/ticket.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +28,14 @@ export class TicketGeneratorService {
   }
 
 
-  generateTicket(params: UserI): Observable<UserI> {
+  generateTicket(numberIdentif: string): Observable<TicketI[]> {
 
-    return this.http.post<UserI>(`${environment.urlAddress}seg/GeneralAdministration/GeneralParameters/enterprise-insert`,
-      params);
+    let param = {
+      Ruc: numberIdentif
+    };
+
+    return this.http.get<TicketI[]>(`${environment.urlAddress}/avService/wTicket`,
+      { params: param });
 
   }
 

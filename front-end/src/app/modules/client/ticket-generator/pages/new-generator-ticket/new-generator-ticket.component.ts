@@ -12,6 +12,7 @@ import { TicketGeneratorService } from '../../services/ticket-generator.service'
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Router } from '@angular/router';
+import { AuthService } from 'app/core/auth/auth.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -38,8 +39,9 @@ export class NewGeneratorTicketComponent implements OnInit {
         private matDialog: MatDialog,
         private fBuilder: FormBuilder,
         private _ticketService: TicketGeneratorService,
+        private _authService: AuthService,
         private router: Router
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.openDialogSearchUser();
@@ -104,25 +106,47 @@ export class NewGeneratorTicketComponent implements OnInit {
         );
 
         if (this.user.isExist) {
-            // userAux.idUser = this.user.idUser;
+            this._authService.registerUser(userAux).pipe(
+                takeUntil(this._unsubscribe),
+                timeout(2000),
+                finalize(() => {
+                    this.isLoading = false;
+                })
+            ).subscribe(
+                (res) => {
+
+                    if (res === true) {
+                        this.generateTicketServ(userAux);
+                    }
+
+                },
+                (err) => { }
+            );
+        } else {
+
+            this.generateTicketServ(userAux);
         }
 
-        delete userAux.isExist;
+    }
 
+    generateTicketServ( user: UserI) {
         this._ticketService
-            .generateTicket(userAux)
+            .generateTicket(this.userForm.get('ruc').value)
             .pipe(
                 takeUntil(this._unsubscribe),
                 timeout(2000),
                 finalize(() => {
                     this.isLoading = false;
 
-                    this.generatedTicket('AAA1', userAux);
                 })
             )
             .subscribe(
-                (res) => {},
-                (err) => {}
+                (res) => {
+
+                    this.generatedTicket(res[0].idp, user);
+
+                },
+                (err) => { }
             );
     }
 
@@ -165,7 +189,7 @@ export class NewGeneratorTicketComponent implements OnInit {
                     alignment: 'center',
                 },
                 {
-                    text: ['AB123'],
+                    text: [queue],
                     style: 'ticket',
                     bold: true,
                     alignment: 'center',

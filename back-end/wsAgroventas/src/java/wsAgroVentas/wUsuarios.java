@@ -27,12 +27,12 @@ public class wUsuarios {
         String vrf = "select * from fnVerificaCliente ('" + ruc + "')";
         String qry = "select * from fnRegistrarCliente ('" + nm + "', '" + dr
                 + "', '" + ruc + "', '" + ml + "', '" + tl + "')";
-        String val = cc.Registro(vrf);
+        String val = cc.getRecordsInJson(vrf);
         if ("Registrar".equals(val)) {
-            cc.EjecutarSQL(qry);
-            fin = cc.Registro(vrf);
+            
+            fin = cc.getRecordsInJson(qry);
         } else {
-            fin = val;
+            fin = cc.getRecordsInJson(qry);
         }
         return fin;
     }

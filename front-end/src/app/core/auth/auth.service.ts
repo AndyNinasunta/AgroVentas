@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
 import { environment } from 'environments/environment';
-import { LoginResponseApiI, UserI } from 'app/shared/interfaces/user.interface';
+import { LoginResponseApiI, RegisterResponseApiI, UserI } from 'app/shared/interfaces/user.interface';
 
 @Injectable()
 export class AuthService {
@@ -170,17 +170,19 @@ export class AuthService {
      *
      * @param user
      */
-     registerUser(user:UserI): Observable<any> {
+     registerUser(user:UserI): Observable<RegisterResponseApiI[]> {
 
-        let param={
-            NomR:user.cliente,
-            DirR:user.direccion,
-            RucR:user.ruc,
-            EmaR:user.mail,
-            TelR:user.telefono
-        }
+        
 
-        return this._httpClient.post<any>(`${environment.urlAddress}/avService/wRegistrar`,{ params: param });
+        const param = new HttpParams()
+        .set('NomR',user.cliente)
+        .set('DirR',user.direccion)
+        .set('RucR',user.ruc)
+        .set('EmaR',user.mail)
+        .set('TelR',user.telefono);
+        console.log(param.toString());
+
+        return this._httpClient.post<RegisterResponseApiI[]>(`${environment.urlAddress}/avService/wRegistrar?${param.toString()}`,[]);
     }
 
     /**

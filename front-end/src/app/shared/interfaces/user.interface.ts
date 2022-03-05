@@ -24,3 +24,11 @@ export interface LoginResponseApiI{
     status?:string;
 
 }
+
+export interface RegisterResponseApiI{
+
+    st:string;
+    idp:string;
+    ident:string;
+
+}

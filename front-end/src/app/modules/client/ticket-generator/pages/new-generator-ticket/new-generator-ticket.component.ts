@@ -115,9 +115,12 @@ export class NewGeneratorTicketComponent implements OnInit {
             ).subscribe(
                 (res) => {
 
-                    if (res === true) {
+                    if (res[0].st === 'Ingreso completo' && res[0].ident!=='null') {
                         this.generateTicketServ(userAux);
+                    }else{
+                        console.log('ERROR AL REGISTRAR');
                     }
+                    
 
                 },
                 (err) => { }

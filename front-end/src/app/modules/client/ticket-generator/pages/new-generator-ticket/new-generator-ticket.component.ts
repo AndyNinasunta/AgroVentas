@@ -52,17 +52,17 @@ export class NewGeneratorTicketComponent implements OnInit {
      */
     createUserForm(): FormGroup {
         return this.fBuilder.group({
-            identification: [
+            ruc: [
                 { disabled: false },
                 [ValidCI, Validators.required],
             ],
-            fullName: [{ disabled: false }, [Validators.required]],
-            email: [
+            cliente: [{ disabled: false }, [Validators.required]],
+            mail: [
                 { disabled: false },
                 [Validators.required, Validators.email],
             ],
-            direction: [{ disabled: false }, [Validators.required]],
-            phoneNumber: [{ disabled: false }, [Validators.required]],
+            direccion: [{ disabled: false }, [Validators.required]],
+            telefono: [{ disabled: false }, [Validators.required]],
             quantityProducts: ['', []],
         });
     }
@@ -104,7 +104,7 @@ export class NewGeneratorTicketComponent implements OnInit {
         );
 
         if (this.user.isExist) {
-            userAux.idUser = this.user.idUser;
+            // userAux.idUser = this.user.idUser;
         }
 
         delete userAux.isExist;
@@ -165,7 +165,7 @@ export class NewGeneratorTicketComponent implements OnInit {
                     alignment: 'center',
                 },
                 {
-                    text: ['1'],
+                    text: ['AB123'],
                     style: 'ticket',
                     bold: true,
                     alignment: 'center',

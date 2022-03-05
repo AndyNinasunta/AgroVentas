@@ -81,15 +81,15 @@ export class SearchUserComponent implements OnInit {
                 finalize(() => {
                     this.isLoading = false;
 
-                    this.user = {
-                        idUser: 1,
-                        isExist: true,
-                        identification: identificationAux,
-                        fullName: 'Andy Ninasunta',
-                        direction: 'Parroquia NID',
-                        email: 'andy2000-09@hotmail.com',
-                        phoneNumber: '0982804639',
-                    };
+                    // this.user = {
+                    //     idUser: 1,
+                    //     isExist: true,
+                    //     identification: identificationAux,
+                    //     fullName: 'Andy Ninasunta',
+                    //     direction: 'Parroquia NID',
+                    //     email: 'andy2000-09@hotmail.com',
+                    //     phoneNumber: '0982804639',
+                    // };
 
                     this.userResponse.emit(this.user);
 
@@ -97,7 +97,14 @@ export class SearchUserComponent implements OnInit {
                 })
             )
             .subscribe(
-                (res) => {},
+                (res) => {
+
+                    console.log(res);
+                    this.user=res;
+                    this.user.isExist=true;
+                    this.userResponse.emit(this.user);
+
+                },
                 (err) => {}
             );
     }

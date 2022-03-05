@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    urlAddress: 'http://127.0.0.1:9001/'
+    urlAddress: 'http://localhost:8089/wsAgroventas/webresources'
 };
 
 /*

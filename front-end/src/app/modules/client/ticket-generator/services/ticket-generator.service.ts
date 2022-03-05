@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiResponseUserI, UserI } from 'app/shared/interfaces/user.interface';
+import { UserI } from 'app/shared/interfaces/user.interface';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
@@ -15,22 +15,22 @@ export class TicketGeneratorService {
   constructor(private http: HttpClient) { }
 
 
-  searchUser(numberIdentif: string): Observable<ApiResponseUserI> {
+  searchUser(numberIdentif: string): Observable<UserI> {
 
     let param = {
-      numberIdentif
+      Ruc: numberIdentif
     };
 
-    return this.http.get<ApiResponseUserI>(`${environment.urlAddress}seg/GeneralAdministration/GeneralParameters/enterprise-insert`,
+    return this.http.get<UserI>(`/webresources/avService/wDataClientes`,
       { params: param });
 
   }
 
 
-  generateTicket(params: UserI): Observable<ApiResponseUserI> {
+  generateTicket(params: UserI): Observable<UserI> {
 
-    return this.http.post<ApiResponseUserI>(`${environment.urlAddress}seg/GeneralAdministration/GeneralParameters/enterprise-insert`,
-    params);
+    return this.http.post<UserI>(`${environment.urlAddress}seg/GeneralAdministration/GeneralParameters/enterprise-insert`,
+      params);
 
   }
 

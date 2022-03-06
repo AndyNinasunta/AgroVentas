@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
+import { environment } from 'environments/environment';
+import { LoginResponseApiI, RegisterResponseApiI, UserI } from 'app/shared/interfaces/user.interface';
 
 @Injectable()
-export class AuthService
-{
+export class AuthService {
     private _authenticated: boolean = false;
 
     /**
@@ -16,8 +17,7 @@ export class AuthService
     constructor(
         private _httpClient: HttpClient,
         private _userService: UserService
-    )
-    {
+    ) {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -27,14 +27,30 @@ export class AuthService
     /**
      * Setter & getter for access token
      */
-    set accessToken(token: string)
-    {
+    set accessToken(token: string) {
         localStorage.setItem('accessToken', token);
     }
 
-    get accessToken(): string
-    {
+    get accessToken(): string {
         return localStorage.getItem('accessToken') ?? '';
+    }
+
+
+    /**
+     * Setter & getter for access token
+     */
+    set user(res: any) {
+
+        let user = {
+            nombre: res.nombre,
+            rolus: res.rolus
+        }
+
+        localStorage.setItem('user', JSON.stringify(user));
+    }
+
+    get user(): string {
+        return localStorage.getItem('user') ?? '';
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -46,8 +62,7 @@ export class AuthService
      *
      * @param email
      */
-    forgotPassword(email: string): Observable<any>
-    {
+    forgotPassword(email: string): Observable<any> {
         return this._httpClient.post('api/auth/forgot-password', email);
     }
 
@@ -56,8 +71,7 @@ export class AuthService
      *
      * @param password
      */
-    resetPassword(password: string): Observable<any>
-    {
+    resetPassword(password: string): Observable<any> {
         return this._httpClient.post('api/auth/reset-password', password);
     }
 
@@ -66,37 +80,41 @@ export class AuthService
      *
      * @param credentials
      */
-    signIn(credentials: { user: string; password: string }): Observable<any>
-    {
+    signIn(us: string, ps: string): Observable<LoginResponseApiI> {
         // Throw error, if the user is already logged in
-        if ( this._authenticated )
-        {
+        if (this._authenticated) {
             return throwError('User is already logged in.');
         }
 
-        return this._httpClient.post('api/auth/sign-in', credentials).pipe(
-            switchMap((response: any) => {
+        let param = {
+            us,
+            ps
+        }
 
-                // Store the access token in the local storage
-                this.accessToken = response.accessToken;
+        return this._httpClient.get<LoginResponseApiI>(`${environment.urlAddress}/avService/wLogin`,
+            { params: param }).pipe(
+                switchMap((response: any) => {
+                    if (response.rolus !== 'Sin acceso') {
+                        // Store the access token in the local storage
+                        this.accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dyt0CoTl4WoVjAHI9Q_CwSKhl6d_9rhM3NrXuJttkao';
 
-                // Set the authenticated flag to true
-                this._authenticated = true;
+                        // Set the authenticated flag to true
+                        this._authenticated = true;
 
-                // Store the user on the user service
-                this._userService.user = response.user;
-
-                // Return a new observable with the response
-                return of(response);
-            })
-        );
+                        this.user = response;
+                        // Store the user on the user service
+                        // this._userService.user = response.user;
+                    }
+                    // Return a new observable with the response
+                    return of(response);
+                })
+            );
     }
 
     /**
      * Sign in using the access token
      */
-    signInUsingToken(): Observable<any>
-    {
+    signInUsingToken(): Observable<any> {
         // Renew token
         return this._httpClient.post('api/auth/refresh-access-token', {
             accessToken: this.accessToken
@@ -126,8 +144,7 @@ export class AuthService
     /**
      * Sign out
      */
-    signOut(): Observable<any>
-    {
+    signOut(): Observable<any> {
         // Remove the access token from the local storage
         localStorage.removeItem('accessToken');
 
@@ -143,9 +160,29 @@ export class AuthService
      *
      * @param user
      */
-    signUp(user: { name: string; email: string; password: string; company: string }): Observable<any>
-    {
+    signUp(user: { name: string; email: string; password: string; company: string }): Observable<any> {
         return this._httpClient.post('api/auth/sign-up', user);
+    }
+
+
+    /**
+     * Register
+     *
+     * @param user
+     */
+     registerUser(user:UserI): Observable<RegisterResponseApiI> {
+
+        
+
+        const param = new HttpParams()
+        .set('NomR',user.cliente)
+        .set('DirR',user.direccion)
+        .set('RucR',user.ruc)
+        .set('EmaR',user.mail)
+        .set('TelR',user.telefono);
+        console.log(param.toString());
+
+        return this._httpClient.post<RegisterResponseApiI>(`${environment.urlAddress}/avService/wRegistrar?${param.toString()}`,[]);
     }
 
     /**
@@ -153,31 +190,26 @@ export class AuthService
      *
      * @param credentials
      */
-    unlockSession(credentials: { email: string; password: string }): Observable<any>
-    {
+    unlockSession(credentials: { email: string; password: string }): Observable<any> {
         return this._httpClient.post('api/auth/unlock-session', credentials);
     }
 
     /**
      * Check the authentication status
      */
-    check(): Observable<boolean>
-    {
+    check(): Observable<boolean> {
         // Check if the user is logged in
-        if ( this._authenticated )
-        {
+        if (this._authenticated) {
             return of(true);
         }
 
         // Check the access token availability
-        if ( !this.accessToken )
-        {
+        if (!this.accessToken) {
             return of(false);
         }
 
         // Check the access token expire date
-        if ( AuthUtils.isTokenExpired(this.accessToken) )
-        {
+        if (AuthUtils.isTokenExpired(this.accessToken)) {
             return of(false);
         }
 

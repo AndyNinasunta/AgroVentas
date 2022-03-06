@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { User } from 'app/core/user/user.types';
 import { UserService } from 'app/core/user/user.service';
+import { LoginResponseApiI, UserI } from 'app/shared/interfaces/user.interface';
 
 @Component({
     selector       : 'user',
@@ -20,7 +21,7 @@ export class UserComponent implements OnInit, OnDestroy
     /* eslint-enable @typescript-eslint/naming-convention */
 
     @Input() showAvatar: boolean = true;
-    user: User;
+    user: LoginResponseApiI;
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -44,15 +45,17 @@ export class UserComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
+        this.user= JSON.parse(localStorage.getItem('user'));
+        this.user.status='online';
         // Subscribe to user changes
-        this._userService.user$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((user: User) => {
-                this.user = user;
+        // this._userService.user$
+        //     .pipe(takeUntil(this._unsubscribeAll))
+        //     .subscribe((user: User) => {
+        //         this.user = user;
 
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
+        //         // Mark for check
+        //         this._changeDetectorRef.markForCheck();
+        //     });
     }
 
     /**
@@ -74,20 +77,20 @@ export class UserComponent implements OnInit, OnDestroy
      *
      * @param status
      */
-    updateUserStatus(status: string): void
-    {
-        // Return if user is not available
-        if ( !this.user )
-        {
-            return;
-        }
+    // updateUserStatus(status: string): void
+    // {
+    //     // Return if user is not available
+    //     if ( !this.user )
+    //     {
+    //         return;
+    //     }
 
-        // Update the user
-        this._userService.update({
-            ...this.user,
-            status
-        }).subscribe();
-    }
+    //     // Update the user
+    //     this._userService.update({
+    //         ...this.user,
+    //         status
+    //     }).subscribe();
+    // }
 
     /**
      * Sign out

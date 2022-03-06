@@ -14,3 +14,21 @@ export interface UserI {
 
     isExist?: boolean;
 }
+
+
+export interface LoginResponseApiI{
+
+    st:string;
+    rolus:string;
+    nombre:string;
+    status?:string;
+
+}
+
+export interface RegisterResponseApiI{
+
+    st:string;
+    idp:string;
+    ident:string;
+
+}

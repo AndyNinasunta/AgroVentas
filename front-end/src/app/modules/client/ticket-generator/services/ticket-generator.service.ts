@@ -6,37 +6,33 @@ import { Observable } from 'rxjs';
 import { TicketI } from '../interfaces/ticket.interface';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class TicketGeneratorService {
+    /**
+     * Constructor
+     */
+    constructor(private http: HttpClient) {}
 
-  /**
-   * Constructor
-   */
-  constructor(private http: HttpClient) { }
+    searchUser(numberIdentif: string): Observable<UserI> {
+        let param = {
+            Ruc: numberIdentif,
+        };
 
+        return this.http.get<UserI>(
+            environment.urlAddress + `/user/wDataClientes`,
+            { params: param }
+        );
+    }
 
-  searchUser(numberIdentif: string): Observable<UserI> {
+    generateTicket(numberIdentif: string): Observable<TicketI> {
+        let param = {
+            Ruc: numberIdentif,
+        };
 
-    let param = {
-      Ruc: numberIdentif
-    };
-
-    return this.http.get<UserI>(environment.urlAddress + `/avService/wDataClientes`,
-      { params: param });
-
-  }
-
-
-  generateTicket(numberIdentif: string): Observable<TicketI> {
-
-    let param = {
-      Ruc: numberIdentif
-    };
-
-    return this.http.get<TicketI>(`${environment.urlAddress}/avService/wTicket`,
-      { params: param });
-
-  }
-
+        return this.http.get<TicketI>(
+            `${environment.urlAddress}/process/wTicket`,
+            { params: param }
+        );
+    }
 }

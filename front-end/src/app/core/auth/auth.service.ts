@@ -5,7 +5,11 @@ import { catchError, switchMap } from 'rxjs/operators';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
 import { environment } from 'environments/environment';
-import { LoginResponseApiI, RegisterResponseApiI, UserI } from 'app/shared/interfaces/user.interface';
+import {
+    LoginResponseApiI,
+    RegisterResponseApiI,
+    UserI,
+} from 'app/shared/interfaces/user.interface';
 
 @Injectable()
 export class AuthService {
@@ -17,8 +21,7 @@ export class AuthService {
     constructor(
         private _httpClient: HttpClient,
         private _userService: UserService
-    ) {
-    }
+    ) {}
 
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors
@@ -35,16 +38,14 @@ export class AuthService {
         return localStorage.getItem('accessToken') ?? '';
     }
 
-
     /**
      * Setter & getter for access token
      */
     set user(res: any) {
-
         let user = {
             nombre: res.nombre,
-            rolus: res.rolus
-        }
+            rolus: res.rolus,
+        };
 
         localStorage.setItem('user', JSON.stringify(user));
     }
@@ -88,15 +89,19 @@ export class AuthService {
 
         let param = {
             us,
-            ps
-        }
+            ps,
+        };
 
-        return this._httpClient.get<LoginResponseApiI>(`${environment.urlAddress}/avService/wLogin`,
-            { params: param }).pipe(
+        return this._httpClient
+            .get<LoginResponseApiI>(`${environment.urlAddress}/user/wLogin`, {
+                params: param,
+            })
+            .pipe(
                 switchMap((response: any) => {
                     if (response.rolus !== 'Sin acceso') {
                         // Store the access token in the local storage
-                        this.accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dyt0CoTl4WoVjAHI9Q_CwSKhl6d_9rhM3NrXuJttkao';
+                        this.accessToken =
+                            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dyt0CoTl4WoVjAHI9Q_CwSKhl6d_9rhM3NrXuJttkao';
 
                         // Set the authenticated flag to true
                         this._authenticated = true;
@@ -116,29 +121,29 @@ export class AuthService {
      */
     signInUsingToken(): Observable<any> {
         // Renew token
-        return this._httpClient.post('api/auth/refresh-access-token', {
-            accessToken: this.accessToken
-        }).pipe(
-            catchError(() =>
-
-                // Return false
-                of(false)
-            ),
-            switchMap((response: any) => {
-
-                // Store the access token in the local storage
-                this.accessToken = response.accessToken;
-
-                // Set the authenticated flag to true
-                this._authenticated = true;
-
-                // Store the user on the user service
-                this._userService.user = response.user;
-
-                // Return true
-                return of(true);
+        return this._httpClient
+            .post('api/auth/refresh-access-token', {
+                accessToken: this.accessToken,
             })
-        );
+            .pipe(
+                catchError(() =>
+                    // Return false
+                    of(false)
+                ),
+                switchMap((response: any) => {
+                    // Store the access token in the local storage
+                    this.accessToken = response.accessToken;
+
+                    // Set the authenticated flag to true
+                    this._authenticated = true;
+
+                    // Store the user on the user service
+                    this._userService.user = response.user;
+
+                    // Return true
+                    return of(true);
+                })
+            );
     }
 
     /**
@@ -160,29 +165,33 @@ export class AuthService {
      *
      * @param user
      */
-    signUp(user: { name: string; email: string; password: string; company: string }): Observable<any> {
+    signUp(user: {
+        name: string;
+        email: string;
+        password: string;
+        company: string;
+    }): Observable<any> {
         return this._httpClient.post('api/auth/sign-up', user);
     }
-
 
     /**
      * Register
      *
      * @param user
      */
-     registerUser(user:UserI): Observable<RegisterResponseApiI> {
-
-        
-
+    registerUser(user: UserI): Observable<RegisterResponseApiI> {
         const param = new HttpParams()
-        .set('NomR',user.cliente)
-        .set('DirR',user.direccion)
-        .set('RucR',user.ruc)
-        .set('EmaR',user.mail)
-        .set('TelR',user.telefono);
+            .set('NomR', user.cliente)
+            .set('DirR', user.direccion)
+            .set('RucR', user.ruc)
+            .set('EmaR', user.mail)
+            .set('TelR', user.telefono);
         console.log(param.toString());
 
-        return this._httpClient.post<RegisterResponseApiI>(`${environment.urlAddress}/avService/wRegistrar?${param.toString()}`,[]);
+        return this._httpClient.post<RegisterResponseApiI>(
+            `${environment.urlAddress}/user/wRegistrar?${param.toString()}`,
+            []
+        );
     }
 
     /**
@@ -190,7 +199,10 @@ export class AuthService {
      *
      * @param credentials
      */
-    unlockSession(credentials: { email: string; password: string }): Observable<any> {
+    unlockSession(credentials: {
+        email: string;
+        password: string;
+    }): Observable<any> {
         return this._httpClient.post('api/auth/unlock-session', credentials);
     }
 

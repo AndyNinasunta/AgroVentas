@@ -16,25 +16,25 @@ export class TicketGeneratorService {
   constructor(private http: HttpClient) { }
 
 
-  searchUser(numberIdentif: string): Observable<UserI[]> {
+  searchUser(numberIdentif: string): Observable<UserI> {
 
     let param = {
       Ruc: numberIdentif
     };
 
-    return this.http.get<UserI[]>(environment.urlAddress + `/avService/wDataClientes`,
+    return this.http.get<UserI>(environment.urlAddress + `/avService/wDataClientes`,
       { params: param });
 
   }
 
 
-  generateTicket(numberIdentif: string): Observable<TicketI[]> {
+  generateTicket(numberIdentif: string): Observable<TicketI> {
 
     let param = {
       Ruc: numberIdentif
     };
 
-    return this.http.get<TicketI[]>(`${environment.urlAddress}/avService/wTicket`,
+    return this.http.get<TicketI>(`${environment.urlAddress}/avService/wTicket`,
       { params: param });
 
   }

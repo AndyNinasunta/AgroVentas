@@ -80,7 +80,7 @@ export class AuthService {
      *
      * @param credentials
      */
-    signIn(us: string, ps: string): Observable<LoginResponseApiI[]> {
+    signIn(us: string, ps: string): Observable<LoginResponseApiI> {
         // Throw error, if the user is already logged in
         if (this._authenticated) {
             return throwError('User is already logged in.');
@@ -91,17 +91,17 @@ export class AuthService {
             ps
         }
 
-        return this._httpClient.get<LoginResponseApiI[]>(`${environment.urlAddress}/avService/wLogin`,
+        return this._httpClient.get<LoginResponseApiI>(`${environment.urlAddress}/avService/wLogin`,
             { params: param }).pipe(
                 switchMap((response: any) => {
-                    if (response[0].rolus !== 'Sin acceso') {
+                    if (response.rolus !== 'Sin acceso') {
                         // Store the access token in the local storage
                         this.accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dyt0CoTl4WoVjAHI9Q_CwSKhl6d_9rhM3NrXuJttkao';
 
                         // Set the authenticated flag to true
                         this._authenticated = true;
 
-                        this.user = response[0];
+                        this.user = response;
                         // Store the user on the user service
                         // this._userService.user = response.user;
                     }
@@ -170,7 +170,7 @@ export class AuthService {
      *
      * @param user
      */
-     registerUser(user:UserI): Observable<RegisterResponseApiI[]> {
+     registerUser(user:UserI): Observable<RegisterResponseApiI> {
 
         
 
@@ -182,7 +182,7 @@ export class AuthService {
         .set('TelR',user.telefono);
         console.log(param.toString());
 
-        return this._httpClient.post<RegisterResponseApiI[]>(`${environment.urlAddress}/avService/wRegistrar?${param.toString()}`,[]);
+        return this._httpClient.post<RegisterResponseApiI>(`${environment.urlAddress}/avService/wRegistrar?${param.toString()}`,[]);
     }
 
     /**

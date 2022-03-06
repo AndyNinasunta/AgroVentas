@@ -72,7 +72,7 @@ export class AuthSignInComponent implements OnInit {
             .subscribe(
                 (res) => {
 
-                    if (res[0].rolus !== 'Sin acceso') {
+                    if (res.rolus !== 'Sin acceso') {
                         // Set the redirect url.
                         // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
                         // to the correct page after a successful sign in. This way, that url can be set via

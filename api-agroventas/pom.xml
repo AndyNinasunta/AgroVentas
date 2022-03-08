@@ -11,7 +11,7 @@
     <groupId>com.agroventas</groupId>
     <artifactId>api-agroventas</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>api-agroventas</name>
     <description>api-agroventas</description>
     <properties>

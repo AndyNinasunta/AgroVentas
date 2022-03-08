@@ -14,7 +14,7 @@ public class PesajeRequest {
     int variedadid;
     int estadoid;
     double calificacion;
-    double precio;
+    int pcid;
     int pesadorid;
     int productoid;
     String detalle;

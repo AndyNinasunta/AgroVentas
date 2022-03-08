@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/home/josedev/Documents/AgroVentas/back-end/wsAgroventas/src/java/wsAgroVentas/conexion.java</file>
+            <file>file:/home/josedev/Documents/AgroVentas/back-end/wsAgroventas/src/java/ws/ApplicationConfig.java</file>
+            <file>file:/home/josedev/Documents/AgroVentas/back-end/wsAgroventas/src/java/ws/AvService.java</file>
+            <file>file:/home/josedev/Documents/AgroVentas/back-end/wsAgroventas/src/java/wsAgroVentas/wProcesos.java</file>
+            <file>file:/home/josedev/Documents/AgroVentas/back-end/wsAgroventas/src/java/ws/CorsFilterC.java</file>
+            <file>file:/home/josedev/Documents/AgroVentas/back-end/wsAgroventas/src/java/wsAgroVentas/wUsuarios.java</file>
+        </group>
+>>>>>>> jsolorzano
     </open-files>
 </project-private>

@@ -1,9 +1,6 @@
 package com.agroventas.apiagroventas.ws.users.controllers;
 
-import com.agroventas.apiagroventas.ws.users.models.RecipeResponse;
-import com.agroventas.apiagroventas.ws.users.models.StatesResponse;
-import com.agroventas.apiagroventas.ws.users.models.TicketResponse;
-import com.agroventas.apiagroventas.ws.users.models.VarietyResponse;
+import com.agroventas.apiagroventas.ws.users.models.*;
 import com.agroventas.apiagroventas.ws.users.services.ProcessService;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +34,21 @@ public class ProcessController {
     @RequestMapping(value = "wRecipes", method = RequestMethod.GET)
     public List<RecipeResponse> getRecipes(){
         return processService.getRecipes();
+    }
+
+    @RequestMapping(value = "wPesaje", method = RequestMethod.POST)
+    public PesajeResponse prcPesaje(@RequestBody PesajeRequest request){
+        return processService.prcPesaje(request);
+    }
+
+    @RequestMapping(value = "wTicketData", method = RequestMethod.GET)
+    public TicketDataResponse getTicketData(@RequestParam String idticket){
+        return processService.getTicketData(idticket);
+    }
+
+    @RequestMapping(value = "wPendTickets", method = RequestMethod.GET)
+    public List<ListTicketsResponse> getPendTickets(){
+        return processService.getPendTickets();
     }
 
 

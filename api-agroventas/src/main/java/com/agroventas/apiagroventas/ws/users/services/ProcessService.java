@@ -27,11 +27,20 @@ public class ProcessService {
         return processRepository.getVariety();
     }
 
-    public PesajeResponse prcPesaje(){
-        return processRepository.prcPesaje();
+    public PesajeResponse prcPesaje(PesajeRequest pesaje){
+        return processRepository.prcPesaje(pesaje);
     }
 
     public List<RecipeResponse> getRecipes(){
         return processRepository.getRecipes();
     }
+
+    public TicketDataResponse getTicketData(String idticket){
+        return processRepository.getTicketData(idticket);
+    }
+
+    public List<ListTicketsResponse> getPendTickets(){
+        return processRepository.getPendsTickets();
+    }
+
 }

@@ -23,6 +23,14 @@ public interface ProcessRepository extends JpaRepository<RootEntity, Integer> {
     @Query(value = "SELECT * FROM fnContainerProd()", nativeQuery = true)
     List<RecipeResponse> getRecipes();
 
-    @Query(value = "SELECT * FROM fnPesajeProducto(:romanatecod, :varid, :staid, :rate, :pcid, :psid, :prid, :dscr, :cant, :recid, :precid)")
-    PesajeResponse prcPesaje();
+    @Query(value = "SELECT * FROM fnPesajeProducto(:#{#pesaje.rcd}, :#{#pesaje.variedadid}, :#{#pesaje.estadoid}, :#{#pesaje.calificacion}," +
+            ":#{#pesaje.precio}, :#{#pesaje.pesadorid}, :#{#pesaje.productoid}, :#{#pesaje.detalle}, :#{#pesaje.cantidad}, :#{#pesaje.recipienteid}," +
+            ":#{#pesaje.pesorecipiente})")
+    PesajeResponse prcPesaje(@Param("pesaje") PesajeRequest pesaje);
+
+    @Query(value = "SELECT * FROM fndatosclienteticket(:idticket)")
+    TicketDataResponse getTicketData(@Param("idticket") String idticket);
+
+    @Query(value = "SELECT * FROM fnticketpendients()")
+    List<ListTicketsResponse> getPendsTickets();
 }

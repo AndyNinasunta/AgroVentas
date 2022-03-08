@@ -1,9 +1,8 @@
 package com.agroventas.apiagroventas.ws.users.services;
 
-import com.agroventas.apiagroventas.ws.users.models.StatesResponse;
-import com.agroventas.apiagroventas.ws.users.models.TicketResponse;
-import com.agroventas.apiagroventas.ws.users.models.VarietyResponse;
+import com.agroventas.apiagroventas.ws.users.models.*;
 import com.agroventas.apiagroventas.ws.users.repository.ProcessRepository;
+import org.springframework.data.history.Revision;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,5 +25,13 @@ public class ProcessService {
 
     public List<VarietyResponse> getVarietys(){
         return processRepository.getVariety();
+    }
+
+    public PesajeResponse prcPesaje(){
+        return processRepository.prcPesaje();
+    }
+
+    public List<RecipeResponse> getRecipes(){
+        return processRepository.getRecipes();
     }
 }

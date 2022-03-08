@@ -1,5 +1,6 @@
 package com.agroventas.apiagroventas.ws.users.controllers;
 
+import com.agroventas.apiagroventas.ws.users.models.RecipeResponse;
 import com.agroventas.apiagroventas.ws.users.models.StatesResponse;
 import com.agroventas.apiagroventas.ws.users.models.TicketResponse;
 import com.agroventas.apiagroventas.ws.users.models.VarietyResponse;
@@ -32,4 +33,11 @@ public class ProcessController {
     public List<VarietyResponse> getVarietys(){
         return processService.getVarietys();
     }
+
+    @RequestMapping(value = "wRecipes", method = RequestMethod.GET)
+    public List<RecipeResponse> getRecipes(){
+        return processService.getRecipes();
+    }
+
+
 }

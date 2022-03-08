@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TicketI } from '../../interfaces/weigher.interface';
+import * as Stomp from '@stomp/stompjs';
+import * as SockJS from 'sockjs-client';
 
 @Component({
     selector: 'app-list-tickets',
@@ -42,7 +44,23 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
         },
     ];
 
+    private stompClient = null;
+
     constructor(private router: Router) {}
+
+    connect(): void {
+        const socket = new SockJS('http://localhost:8080/agroventas-socket');
+        this.stompClient = Stomp.Stomp.over(socket);
+
+        const _this = this;
+        this.stompClient.connect({}, function (frame) {
+            console.log('Connected: ' + frame);
+
+            _this.stompClient.subscribe('/realtime/sensors', function (hello) {
+                console.log(hello);
+            });
+        });
+    }
 
     ngOnInit(): void {
         this.dataSource = new MatTableDataSource(this.tickets);

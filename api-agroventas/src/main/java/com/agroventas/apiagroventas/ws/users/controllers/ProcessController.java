@@ -68,6 +68,7 @@ public class ProcessController {
     @MessageMapping("wSensor")
     @SendTo("/realtime/sensors")
     public SensorInfo sensorInfo(SensorInfo message){
+        System.out.println("Recibido " + message.toString());
         return message;
     }
 }

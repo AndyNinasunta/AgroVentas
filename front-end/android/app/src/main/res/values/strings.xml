@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">AgroVentas</string>
+    <string name="title_activity_main">AgroVentas</string>
+    <string name="package_name">com.agroventas.main</string>
+    <string name="custom_url_scheme">com.agroventas.main</string>
+</resources>

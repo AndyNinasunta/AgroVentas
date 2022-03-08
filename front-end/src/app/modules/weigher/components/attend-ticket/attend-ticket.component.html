@@ -7,16 +7,12 @@
     <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 py-6">
         <div class="grid grid-cols-1 gap-8 w-full">
             <div
-                class="flex flex-col flex-auto bg-greenEsmeraldLight shadow-xl shadow-esmeraldDark rounded-2xl overflow-hidden"
-            >
+                class="flex flex-col flex-auto bg-greenEsmeraldLight shadow-xl shadow-esmeraldDark rounded-2xl overflow-hidden">
                 <div class="overflow-x-auto">
                     <!-- Header Module -->
-                    <div
-                        class="flex-auto sm:flex items-center sm:justify-center px-5"
-                    >
+                    <div class="flex-auto sm:flex items-center sm:justify-center px-5">
                         <div
-                            class="text-center text-2xl text-white tracking-tight leading-6 py-4 font-bold text-bvgPrimary"
-                        >
+                            class="text-center text-2xl text-white tracking-tight leading-6 py-4 font-bold text-bvgPrimary">
                             TICKET #XYZ
                         </div>
                         <!-- <div class="text-center px-4 sm:space-x-8 mt-4 sm:m-0">
@@ -35,159 +31,92 @@
                 </div>
             </div>
         </div>
-        <div
-            class="flex flex-col flex-auto bg-card shadow-xl shadow-esmeraldDark rounded-2xl overflow-hidden mt-2"
-        >
+        <div class="flex flex-col flex-auto bg-card shadow-xl shadow-esmeraldDark rounded-2xl overflow-hidden mt-2">
             <div class="overflow-x-auto">
                 <!-- Header Module -->
-                <div
-                    class="flex-col sm:flex items-center sm:justify-center px-5"
-                >
+                <div class="flex-col sm:flex items-center sm:justify-center px-5">
                     <div
-                        class="justify-self-start text-center text-2xl text-greenEsmeraldLight tracking-tight leading-6 py-4 font-bold text-bvgPrimary"
-                    >
+                        class="justify-self-start text-center text-2xl text-greenEsmeraldLight tracking-tight leading-6 py-4 font-bold text-bvgPrimary">
                         Cliente
                     </div>
                     <form [formGroup]="userForm">
                         <div class="overflow-x-auto">
-                            <div
-                                class="flex flex-col sm:flex-row w-full justify-start"
-                            >
+                            <div class="flex flex-col sm:flex-row w-full justify-start">
                                 <div class="sm:w-auto">
                                     <div class="grid grid-cols-1 w-full">
-                                        <div
-                                            class="grid grid-cols-1 sm:grid-cols-2 gap-x-2 px-10 pt-4"
-                                        >
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-2 px-10 pt-4">
                                             <div class="flex w-full sm:w-60">
-                                                <mat-form-field
-                                                    class="flex-auto w-full px-2 fuse-mat-dense"
-                                                >
-                                                    <mat-label
-                                                        class="mb-2 text-base font-medium text-esmeraldDark"
-                                                    >
+                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
                                                         Ruc / Cédula *
                                                     </mat-label>
 
-                                                    <input
-                                                        formControlName="identification"
-                                                        matInput
-                                                        [placeholder]="
+                                                    <input formControlName="identification" matInput [placeholder]="
                                                             'RUC / CÉDULA'
-                                                        "
-                                                        type="text"
-                                                    />
-                                                    <mat-icon
-                                                        matPrefix
-                                                        [svgIcon]="
+                                                        " type="text" />
+                                                    <mat-icon matPrefix [svgIcon]="
                                                             'heroicons_outline:identification'
-                                                        "
-                                                    >
+                                                        ">
                                                     </mat-icon>
                                                 </mat-form-field>
                                             </div>
 
                                             <div class="w-full sm:w-60">
-                                                <mat-form-field
-                                                    class="flex-auto w-full px-2 fuse-mat-dense"
-                                                >
-                                                    <mat-label
-                                                        class="mb-2 text-base font-medium text-esmeraldDark"
-                                                    >
+                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
                                                         Nombre *
                                                     </mat-label>
 
-                                                    <input
-                                                        formControlName="fullName"
-                                                        matInput
-                                                        [placeholder]="'Nombre'"
-                                                        type="text"
-                                                    />
-                                                    <mat-icon
-                                                        matPrefix
-                                                        [svgIcon]="
+                                                    <input formControlName="fullName" matInput [placeholder]="'Nombre'"
+                                                        type="text" />
+                                                    <mat-icon matPrefix [svgIcon]="
                                                             'heroicons_outline:user'
-                                                        "
-                                                    >
+                                                        ">
                                                     </mat-icon>
                                                 </mat-form-field>
                                             </div>
 
                                             <div class="w-full sm:w-60">
-                                                <mat-form-field
-                                                    class="flex-auto w-full px-2 fuse-mat-dense"
-                                                >
-                                                    <mat-label
-                                                        class="mb-2 text-base font-medium text-esmeraldDark"
-                                                    >
+                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
                                                         Email *
                                                     </mat-label>
 
-                                                    <input
-                                                        formControlName="email"
-                                                        matInput
-                                                        [placeholder]="'Email'"
-                                                        type="text"
-                                                    />
-                                                    <mat-icon
-                                                        matPrefix
-                                                        [svgIcon]="'email'"
-                                                    >
+                                                    <input formControlName="email" matInput [placeholder]="'Email'"
+                                                        type="text" />
+                                                    <mat-icon matPrefix [svgIcon]="'email'">
                                                     </mat-icon>
                                                 </mat-form-field>
                                             </div>
 
                                             <div class="w-full sm:w-60">
-                                                <mat-form-field
-                                                    class="flex-auto w-full px-2 fuse-mat-dense"
-                                                >
-                                                    <mat-label
-                                                        class="mb-2 text-base font-medium text-esmeraldDark"
-                                                    >
+                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
                                                         Teléfono *
                                                     </mat-label>
 
-                                                    <input
-                                                        formControlName="phoneNumber"
-                                                        matInput
-                                                        [placeholder]="
+                                                    <input formControlName="phoneNumber" matInput [placeholder]="
                                                             'Teléfono'
-                                                        "
-                                                        type="text"
-                                                    />
-                                                    <mat-icon
-                                                        matPrefix
-                                                        [svgIcon]="
+                                                        " type="text" />
+                                                    <mat-icon matPrefix [svgIcon]="
                                                             'heroicons_outline:phone'
-                                                        "
-                                                    >
+                                                        ">
                                                     </mat-icon>
                                                 </mat-form-field>
                                             </div>
 
                                             <div class="w-full sm:col-span-2">
-                                                <mat-form-field
-                                                    class="flex-auto w-full px-2 fuse-mat-dense"
-                                                >
-                                                    <mat-label
-                                                        class="mb-2 text-base font-medium text-esmeraldDark"
-                                                    >
+                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
                                                         Dirección *
                                                     </mat-label>
 
-                                                    <textarea
-                                                        formControlName="direction"
-                                                        matInput
-                                                        [placeholder]="
+                                                    <textarea formControlName="direction" matInput [placeholder]="
                                                             'Dirección'
-                                                        "
-                                                        type="text"
-                                                    ></textarea>
-                                                    <mat-icon
-                                                        matPrefix
-                                                        [svgIcon]="
+                                                        " type="text"></textarea>
+                                                    <mat-icon matPrefix [svgIcon]="
                                                             'location_on'
-                                                        "
-                                                    >
+                                                        ">
                                                     </mat-icon>
                                                 </mat-form-field>
                                             </div>
@@ -200,6 +129,84 @@
                 </div>
             </div>
         </div>
+
+        <div class="flex flex-col flex-auto bg-card shadow-xl shadow-esmeraldDark rounded-2xl overflow-hidden mt-2">
+            <div class="overflow-x-auto">
+                <!-- Header Module -->
+                <div class="flex-col sm:flex items-center sm:justify-center px-5">
+                    <div
+                        class="justify-self-start text-center text-2xl text-greenEsmeraldLight tracking-tight leading-6 py-4 font-bold text-bvgPrimary">
+                        Características del producto Recibido
+                    </div>
+                    <form>
+                        <div class="overflow-x-auto">
+                            <div class="flex flex-col sm:flex-row w-full justify-start">
+                                <div class="sm:w-auto">
+                                    <div class="grid grid-cols-1 w-full">
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-2 px-10 pt-4">
+                                            <div class="w-full sm:w-60">
+
+                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                        Variedad *
+                                                    </mat-label>
+
+                                                    <mat-select matInput [placeholder]="
+                                'Variedad'
+                            ">
+
+                                                        <mat-option [value]="''">
+                                                            Seleccione
+                                                        </mat-option>
+
+                                                    </mat-select>
+
+                                                    <mat-icon matPrefix [svgIcon]="
+                                        'iconsmind:contrast'
+                                    ">
+                                                    </mat-icon>
+                                                </mat-form-field>
+
+                                            </div>
+
+                                            <div class="w-full sm:w-60">
+                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                        Estado *
+                                                    </mat-label>
+
+                                                    <mat-select matInput [placeholder]="
+                                        'Estado'
+                                    ">
+
+                                                        <mat-option [value]="''">
+                                                            Seleccione
+                                                        </mat-option>
+                                                        <mat-option [value]="'S'">
+                                                            Seco
+                                                        </mat-option>
+                                                        <mat-option [value]="'B'">
+                                                            Baba
+                                                        </mat-option>
+
+                                                    </mat-select>
+
+                                                    <mat-icon matPrefix [svgIcon]="
+                                        'iconsmind:pipe'
+                                    ">
+                                                    </mat-icon>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="flex flex-col flex-auto sm:overflow-auto-1">
             <ng-container>
                 <!-- Pasarlo a un componente compartido -->
@@ -207,76 +214,45 @@
                 <div>
                     <div class="header-table h-10 bg-bvgPrimary mt-2 mb-2">
                         <div class="text-start sm:space-x-8">
-                            <button
-                                mat-button
-                                class="bg-esmerald text-white text-base"
-                            >
-                                <mat-icon
-                                    class="text-white fill-red-500 icon-size-6"
-                                    [svgIcon]="'heroicons_outline:plus-sm'"
-                                ></mat-icon>
+                            <button (click)="openDialogProduct()" mat-button class="bg-esmerald text-white text-base">
+                                <mat-icon class="text-white fill-red-500 icon-size-6"
+                                    [svgIcon]="'heroicons_outline:plus-sm'"></mat-icon>
                                 <span class="">Añadir detalle</span>
                             </button>
                         </div>
                     </div>
                     <div class="overflow-x-auto overflow-y-hidden">
-                        <table
-                            mat-table
-                            [dataSource]="dataSource"
-                            class="mat-elevation-z8"
-                        >
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                             <ng-container matColumnDef="acciones">
-                                <th
-                                    mat-header-cell
-                                    *matHeaderCellDef
-                                    class="px-2 text-white font-bold text-base text-center"
-                                >
+                                <th mat-header-cell *matHeaderCellDef
+                                    class="px-2 text-white font-bold text-base text-center">
                                     Opciones
                                 </th>
 
-                                <td
-                                    class="p-2 text-center"
-                                    mat-cell
-                                    *matCellDef="let element; let i = index"
-                                    [data-label]="'Código'"
-                                >
+                                <td class="p-2 text-center" mat-cell *matCellDef="let element; let i = index"
+                                    [data-label]="'Código'">
                                     <!-- heroicons_outline:plus -->
                                     <button type="button">
-                                        <mat-icon
-                                            class="mx-2 text-white hover:text-red-600"
-                                            title="Descartar"
+                                        <mat-icon class="mx-2 text-white hover:text-red-600" title="Descartar"
                                             [svgIcon]="
                                                 'heroicons_outline:trash'
-                                            "
-                                        >
+                                            ">
                                         </mat-icon>
                                     </button>
                                 </td>
                             </ng-container>
 
                             <ng-container matColumnDef="rowNumber">
-                                <th
-                                    mat-header-cell
-                                    *matHeaderCellDef
-                                    class="px-2 text-white font-bold text-base text-center"
-                                >
+                                <th mat-header-cell *matHeaderCellDef
+                                    class="px-2 text-white font-bold text-base text-center">
                                     #
                                 </th>
-                                <td
-                                    class="px-2"
-                                    mat-cell
-                                    *matCellDef="let element"
-                                    [data-label]="'id'"
-                                >
-                                    <div
-                                        class="flex my-2 sm:justify-center j-between"
-                                    >
+                                <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'id'">
+                                    <div class="flex my-2 sm:justify-center j-between">
                                         <!-- <span
                                                     class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
-                                        <p
-                                            class="truncate-text text-base text-white text-center"
-                                            matTooltip="{{ element.rowNumber }}"
-                                        >
+                                        <p class="truncate-text text-base text-white text-center"
+                                            matTooltip="{{ element.rowNumber }}">
                                             {{ element.rowNumber }}
                                         </p>
                                     </div>
@@ -284,28 +260,16 @@
                             </ng-container>
 
                             <ng-container matColumnDef="producto">
-                                <th
-                                    mat-header-cell
-                                    *matHeaderCellDef
-                                    class="px-2 text-white font-bold text-base text-center"
-                                >
+                                <th mat-header-cell *matHeaderCellDef
+                                    class="px-2 text-white font-bold text-base text-center">
                                     PRODUCTO
                                 </th>
-                                <td
-                                    class="px-2"
-                                    mat-cell
-                                    *matCellDef="let element"
-                                    [data-label]="'id'"
-                                >
-                                    <div
-                                        class="flex my-2 sm:justify-center j-between"
-                                    >
+                                <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'id'">
+                                    <div class="flex my-2 sm:justify-center j-between">
                                         <!-- <span
                                                     class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
-                                        <p
-                                            class="truncate-text text-base text-white text-center"
-                                            matTooltip="{{ element.producto }}"
-                                        >
+                                        <p class="truncate-text text-base text-white text-center"
+                                            matTooltip="{{ element.producto }}">
                                             {{ element.producto }}
                                         </p>
                                     </div>
@@ -313,28 +277,16 @@
                             </ng-container>
 
                             <ng-container matColumnDef="variedad">
-                                <th
-                                    mat-header-cell
-                                    *matHeaderCellDef
-                                    class="px-2 text-white font-bold text-base text-center"
-                                >
+                                <th mat-header-cell *matHeaderCellDef
+                                    class="px-2 text-white font-bold text-base text-center">
                                     VARIEDAD
                                 </th>
-                                <td
-                                    class="px-2"
-                                    mat-cell
-                                    *matCellDef="let element"
-                                    [data-label]="'id'"
-                                >
-                                    <div
-                                        class="flex my-2 sm:justify-center j-between"
-                                    >
+                                <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'id'">
+                                    <div class="flex my-2 sm:justify-center j-between">
                                         <!-- <span
                                                     class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
-                                        <p
-                                            class="truncate-text text-base text-white text-center"
-                                            matTooltip="{{ element.variedad }}"
-                                        >
+                                        <p class="truncate-text text-base text-white text-center"
+                                            matTooltip="{{ element.variedad }}">
                                             {{ element.variedad }}
                                         </p>
                                     </div>
@@ -342,28 +294,16 @@
                             </ng-container>
 
                             <ng-container matColumnDef="detalle">
-                                <th
-                                    mat-header-cell
-                                    *matHeaderCellDef
-                                    class="px-2 text-white font-bold text-base text-center"
-                                >
+                                <th mat-header-cell *matHeaderCellDef
+                                    class="px-2 text-white font-bold text-base text-center">
                                     DETALLE
                                 </th>
-                                <td
-                                    class="px-2"
-                                    mat-cell
-                                    *matCellDef="let element"
-                                    [data-label]="'id'"
-                                >
-                                    <div
-                                        class="flex my-2 sm:justify-center j-between"
-                                    >
+                                <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'id'">
+                                    <div class="flex my-2 sm:justify-center j-between">
                                         <!-- <span
                                                     class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
-                                        <p
-                                            class="truncate-text text-base text-white text-center"
-                                            matTooltip="{{ element.detalle }}"
-                                        >
+                                        <p class="truncate-text text-base text-white text-center"
+                                            matTooltip="{{ element.detalle }}">
                                             {{ element.detalle }}
                                         </p>
                                     </div>
@@ -371,28 +311,16 @@
                             </ng-container>
 
                             <ng-container matColumnDef="cantidad">
-                                <th
-                                    mat-header-cell
-                                    *matHeaderCellDef
-                                    class="px-2 text-white font-bold text-base text-center"
-                                >
+                                <th mat-header-cell *matHeaderCellDef
+                                    class="px-2 text-white font-bold text-base text-center">
                                     CANTIDAD
                                 </th>
-                                <td
-                                    class="px-2"
-                                    mat-cell
-                                    *matCellDef="let element"
-                                    [data-label]="'id'"
-                                >
-                                    <div
-                                        class="flex my-2 sm:justify-center j-between"
-                                    >
+                                <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'id'">
+                                    <div class="flex my-2 sm:justify-center j-between">
                                         <!-- <span
                                                     class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
-                                        <p
-                                            class="truncate-text text-base text-white text-center"
-                                            matTooltip="{{ element.cantidad }}"
-                                        >
+                                        <p class="truncate-text text-base text-white text-center"
+                                            matTooltip="{{ element.cantidad }}">
                                             {{ element.cantidad }}
                                         </p>
                                     </div>
@@ -400,28 +328,16 @@
                             </ng-container>
 
                             <ng-container matColumnDef="tara">
-                                <th
-                                    mat-header-cell
-                                    *matHeaderCellDef
-                                    class="px-2 text-white font-bold text-base text-center"
-                                >
+                                <th mat-header-cell *matHeaderCellDef
+                                    class="px-2 text-white font-bold text-base text-center">
                                     TARA
                                 </th>
-                                <td
-                                    class="px-2"
-                                    mat-cell
-                                    *matCellDef="let element"
-                                    [data-label]="'tara'"
-                                >
-                                    <div
-                                        class="flex my-2 sm:justify-center j-between"
-                                    >
+                                <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'tara'">
+                                    <div class="flex my-2 sm:justify-center j-between">
                                         <!-- <span
                                                     class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
-                                        <p
-                                            class="truncate-text text-base text-white text-center"
-                                            matTooltip="{{ element.tara }}"
-                                        >
+                                        <p class="truncate-text text-base text-white text-center"
+                                            matTooltip="{{ element.tara }}">
                                             {{ element.tara }}
                                         </p>
                                     </div>
@@ -429,61 +345,38 @@
                             </ng-container>
 
                             <ng-container matColumnDef="librasTara">
-                                <th
-                                    mat-header-cell
-                                    *matHeaderCellDef
-                                    class="px-2 text-white font-bold text-base text-center"
-                                >
+                                <th mat-header-cell *matHeaderCellDef
+                                    class="px-2 text-white font-bold text-base text-center">
                                     LIBS. TARA
                                 </th>
-                                <td
-                                    class="px-2"
-                                    mat-cell
-                                    *matCellDef="let element"
-                                    [data-label]="'tara'"
-                                >
-                                    <div
-                                        class="flex my-2 sm:justify-center j-between"
-                                    >
+                                <td class="px-2" mat-cell *matCellDef="let element" [data-label]="'tara'">
+                                    <div class="flex my-2 sm:justify-center j-between">
                                         <!-- <span
                                                     class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
-                                        <p
-                                            class="truncate-text text-base text-white text-center"
-                                            matTooltip="{{
+                                        <p class="truncate-text text-base text-white text-center" matTooltip="{{
                                                 element.librasTara
-                                            }}"
-                                        >
+                                            }}">
                                             {{ element.librasTara }}
                                         </p>
                                     </div>
                                 </td>
                             </ng-container>
 
-                            <tr
-                                mat-header-row
-                                *matHeaderRowDef="pesajeDetailColumns"
-                                class="px-6 align-middle border border-solid text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-greenEsmeraldLight border-greemEsmeraldDark"
-                            ></tr>
+                            <tr mat-header-row *matHeaderRowDef="pesajeDetailColumns"
+                                class="px-6 align-middle border border-solid text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-greenEsmeraldLight border-greemEsmeraldDark">
+                            </tr>
 
-                            <tr
-                                mat-row
-                                *matRowDef="
+                            <tr mat-row *matRowDef="
                                     let row;
                                     columns: pesajeDetailColumns;
                                     let i = index
-                                "
-                                class="bg-esmeraldDark"
-                                [ngClass]="{
+                                " class="bg-esmeraldDark" [ngClass]="{
                                     'bg-esmeraldLight': i % 2 !== 0
-                                }"
-                            ></tr>
+                                }"></tr>
 
                             <!-- There is no data -->
                             <tr class="mat-row" *matNoDataRow>
-                                <td
-                                    class="mat-cell text-lg font-bold"
-                                    colspan="99999"
-                                >
+                                <td class="mat-cell text-lg font-bold" colspan="99999">
                                     No se encontró ningun registro.
                                 </td>
                             </tr>
@@ -492,39 +385,23 @@
                 </div>
             </ng-container>
         </div>
-        <div
-            class="flex flex-col flex-auto bg-card shadow-xl shadow-esmeraldDark rounded-2xl overflow-hidden mt-2"
-        >
+        <div class="flex flex-col flex-auto bg-card shadow-xl shadow-esmeraldDark rounded-2xl overflow-hidden mt-2">
             <div class="overflow-x-auto">
                 <!-- Header Module -->
-                <div
-                    class="flex-col sm:flex items-center sm:justify-center px-5"
-                >
+                <div class="flex-col sm:flex items-center sm:justify-center px-5">
                     <div class="overflow-x-auto">
-                        <div
-                            class="flex flex-col sm:flex-row w-full justify-start"
-                        >
+                        <div class="flex flex-col sm:flex-row w-full justify-start">
                             <div class="sm:w-auto">
                                 <div class="grid grid-cols-1 w-full">
-                                    <div
-                                        class="grid grid-cols-1 sm:grid-cols-2 gap-x-2 px-10 pt-4"
-                                    >
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-2 px-10 pt-4">
                                         <div class="flex w-full sm:w-60">
-                                            <mat-form-field
-                                                class="flex-auto px-2 fuse-mat-dense text-center"
-                                            >
-                                                <mat-label
-                                                    class="mb-2 font-medium text-esmeraldDark"
-                                                >
+                                            <mat-form-field class="flex-auto px-2 fuse-mat-dense text-center">
+                                                <mat-label class="mb-2 font-medium text-esmeraldDark">
                                                     Calificación de este pesaje
                                                     (%)
                                                 </mat-label>
 
-                                                <input
-                                                    matInput
-                                                    value="0"
-                                                    type="text"
-                                                />
+                                                <input matInput value="0" type="text" />
                                             </mat-form-field>
                                         </div>
                                     </div>

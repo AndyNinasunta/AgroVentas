@@ -53,12 +53,16 @@ public class AvService {
         System.out.println(dataLog);
        
         
+<<<<<<< HEAD
         return Response.ok(dataLog)
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
                 .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
                 .header("Access-Control-Max-Age", "3600")
                 .build();        
+=======
+        return Response.ok(dataLog).build();        
+>>>>>>> jsolorzano
     }
     
     @POST
@@ -70,22 +74,14 @@ public class AvService {
         String dataReg = pUser.prcRegCliente(NomR, DirR, 
                 RucR,  EmaR,  TelR);
             
-        return Response.ok(dataReg)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
-                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
-                .build();  
+        return Response.ok(dataReg).build();  
     }
     
     @GET
     @Path("wDataClientes")
     public Response wDataClientes(@QueryParam("Ruc") String Ruc){
         String dataPac = pUser.prcDataCliente(Ruc);
-        return Response.ok(dataPac)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
-                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
-                .build();
+        return Response.ok(dataPac).build();
     }
     @GET
     @Path("wTicket")

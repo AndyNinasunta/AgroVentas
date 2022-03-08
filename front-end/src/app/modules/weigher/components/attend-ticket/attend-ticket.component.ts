@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { PesajeDetalleI, TicketI } from '../../interfaces/weigher.interface';
+import { FormProductComponent } from '../form-product/form-product.component';
 
 export interface PeriodicElement {
     name: string;
@@ -46,7 +47,7 @@ export class AttendTicketComponent implements OnInit {
 
     pesajeDetails: PesajeDetalleI[] = [];
 
-    constructor(private matDialog: MatDialog, private fBuilder: FormBuilder) {}
+    constructor(private matDialog: MatDialog, private fBuilder: FormBuilder,) { }
 
     ngOnInit(): void {
         this.userForm = this.createUserForm();
@@ -60,6 +61,13 @@ export class AttendTicketComponent implements OnInit {
             email: [{ value: '', disabled: true }],
             direction: [{ value: '', disabled: true }],
             phoneNumber: [{ value: '', disabled: true }],
+        });
+    }
+
+    openDialogProduct(data?: any) {
+        const dialogDetail = this.matDialog.open(FormProductComponent, {
+            data: data,
+            disableClose: false
         });
     }
 }

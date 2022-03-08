@@ -95,9 +95,9 @@ export class SearchUserComponent implements OnInit {
             )
             .subscribe(
                 (res) => {
-                    if (res[0]) {
+                    if (res) {
                         console.log(res);
-                        this.user = res[0];
+                        this.user = res;
                         this.user.isExist = true;
                     }
                    

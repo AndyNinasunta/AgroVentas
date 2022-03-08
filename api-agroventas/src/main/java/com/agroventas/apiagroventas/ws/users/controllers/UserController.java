@@ -2,9 +2,7 @@ package com.agroventas.apiagroventas.ws.users.controllers;
 
 import com.agroventas.apiagroventas.ws.users.models.DataClienteResponse;
 import com.agroventas.apiagroventas.ws.users.models.LoginResponse;
-import com.agroventas.apiagroventas.ws.users.models.RegClienteResponse;
 import com.agroventas.apiagroventas.ws.users.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +26,7 @@ public class UserController {
     public ResponseEntity<Object> regUser(@RequestParam String NomR, @RequestParam String DirR, @RequestParam String RucR,
                                           @RequestParam String EmaR, @RequestParam String TelR){
         String validate = userService.verUser(RucR);
-        if(validate=="Registrar"){
+        if(validate == "Registrar"){
             return new ResponseEntity<Object>(userService.regUser(NomR, DirR, RucR, EmaR, TelR), HttpStatus.valueOf(200));
         }
         return new ResponseEntity<Object>(validate, HttpStatus.valueOf(200));

@@ -43,4 +43,12 @@ public class ProcessService {
         return processRepository.getPendsTickets();
     }
 
+    public InvalidateTicketResponse invalidateTicket(String idticket){
+        return processRepository.invalidateTicket(idticket);
+    }
+
+    public PayCashResponse payCash(PayCashRequest pay){
+        return processRepository.payCash(pay);
+    }
+
 }

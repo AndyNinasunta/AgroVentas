@@ -33,4 +33,10 @@ public interface ProcessRepository extends JpaRepository<RootEntity, Integer> {
 
     @Query(value = "SELECT * FROM fnticketpendients()", nativeQuery = true)
     List<ListTicketsResponse> getPendsTickets();
+
+    @Query(value = "SELECT * FROM fnanularticket(:idticket)", nativeQuery = true)
+    InvalidateTicketResponse invalidateTicket(@Param("idticket") String idticket);
+
+    @Query(value = "SELECT * FROM fnpaycash(:#{#pay.rmnid}, :#{#pay.cajero}, :#{#pay.payvalue})", nativeQuery = true)
+    PayCashResponse payCash(@Param("pay") PayCashRequest pay);
 }

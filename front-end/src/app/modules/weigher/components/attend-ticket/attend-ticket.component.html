@@ -51,7 +51,7 @@
                                                         Ruc / Cédula *
                                                     </mat-label>
 
-                                                    <input formControlName="identification" matInput [placeholder]="
+                                                    <input formControlName="ruc" matInput [placeholder]="
                                                             'RUC / CÉDULA'
                                                         " type="text" />
                                                     <mat-icon matPrefix [svgIcon]="
@@ -67,7 +67,7 @@
                                                         Nombre *
                                                     </mat-label>
 
-                                                    <input formControlName="fullName" matInput [placeholder]="'Nombre'"
+                                                    <input formControlName="cliente" matInput [placeholder]="'Nombre'"
                                                         type="text" />
                                                     <mat-icon matPrefix [svgIcon]="
                                                             'heroicons_outline:user'
@@ -82,7 +82,7 @@
                                                         Email *
                                                     </mat-label>
 
-                                                    <input formControlName="email" matInput [placeholder]="'Email'"
+                                                    <input formControlName="mail" matInput [placeholder]="'Email'"
                                                         type="text" />
                                                     <mat-icon matPrefix [svgIcon]="'email'">
                                                     </mat-icon>
@@ -95,7 +95,7 @@
                                                         Teléfono *
                                                     </mat-label>
 
-                                                    <input formControlName="phoneNumber" matInput [placeholder]="
+                                                    <input formControlName="telefono" matInput [placeholder]="
                                                             'Teléfono'
                                                         " type="text" />
                                                     <mat-icon matPrefix [svgIcon]="
@@ -111,7 +111,7 @@
                                                         Dirección *
                                                     </mat-label>
 
-                                                    <textarea formControlName="direction" matInput [placeholder]="
+                                                    <textarea formControlName="direccion" matInput [placeholder]="
                                                             'Dirección'
                                                         " type="text"></textarea>
                                                     <mat-icon matPrefix [svgIcon]="
@@ -144,59 +144,60 @@
                                 <div class="sm:w-auto">
                                     <div class="grid grid-cols-1 w-full">
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-2 px-10 pt-4">
-                                            <div class="w-full sm:w-60">
+                                            <ng-container *ngIf="stateCoat && varietys">
+                                                <div class="w-full sm:w-60">
 
-                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
-                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
-                                                        Variedad *
-                                                    </mat-label>
+                                                    <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                        <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                            Variedad *
+                                                        </mat-label>
 
-                                                    <mat-select matInput [placeholder]="
+                                                        <mat-select matInput [placeholder]="
                                 'Variedad'
                             ">
 
-                                                        <mat-option [value]="''">
-                                                            Seleccione
-                                                        </mat-option>
+                                                            <mat-option [value]="''">
+                                                                Seleccione
+                                                            </mat-option>
 
-                                                    </mat-select>
+                                                            <mat-option *ngFor="let item of varietys"
+                                                                [value]="item.variedadid">
+                                                                {{item.variedad}}
+                                                            </mat-option>
 
-                                                    <mat-icon matPrefix [svgIcon]="
+                                                        </mat-select>
+
+                                                        <mat-icon matPrefix [svgIcon]="
                                         'iconsmind:contrast'
                                     ">
-                                                    </mat-icon>
-                                                </mat-form-field>
+                                                        </mat-icon>
+                                                    </mat-form-field>
 
-                                            </div>
+                                                </div>
 
-                                            <div class="w-full sm:w-60">
-                                                <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
-                                                    <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
-                                                        Estado *
-                                                    </mat-label>
+                                                <div class="w-full sm:w-60">
+                                                    <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                        <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                            Estado *
+                                                        </mat-label>
 
-                                                    <mat-select matInput [placeholder]="
-                                        'Estado'
-                                    ">
+                                                        <mat-select matInput [placeholder]="'Estado'">
 
-                                                        <mat-option [value]="''">
-                                                            Seleccione
-                                                        </mat-option>
-                                                        <mat-option [value]="'S'">
-                                                            Seco
-                                                        </mat-option>
-                                                        <mat-option [value]="'B'">
-                                                            Baba
-                                                        </mat-option>
+                                                            <mat-option [value]="''">
+                                                                Seleccione
+                                                            </mat-option>
+                                                            <mat-option *ngFor="let item of stateCoat"
+                                                                [value]="item.estadoid">
+                                                                {{item.estado}}
+                                                            </mat-option>
 
-                                                    </mat-select>
+                                                        </mat-select>
 
-                                                    <mat-icon matPrefix [svgIcon]="
-                                        'iconsmind:pipe'
-                                    ">
-                                                    </mat-icon>
-                                                </mat-form-field>
-                                            </div>
+                                                        <mat-icon matPrefix [svgIcon]="'iconsmind:pipe'">
+                                                        </mat-icon>
+                                                    </mat-form-field>
+                                                </div>
+                                            </ng-container>
                                         </div>
                                     </div>
                                 </div>

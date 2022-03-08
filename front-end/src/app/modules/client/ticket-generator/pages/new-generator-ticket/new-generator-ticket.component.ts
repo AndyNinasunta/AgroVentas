@@ -65,7 +65,7 @@ export class NewGeneratorTicketComponent implements OnInit {
             ],
             direccion: [{ disabled: false }, [Validators.required]],
             telefono: [{ disabled: false }, [Validators.required]],
-            quantityProducts: ['', []],
+            // quantityProducts: ['', []],
         });
     }
 

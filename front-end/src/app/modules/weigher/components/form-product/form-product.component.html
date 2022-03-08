@@ -1,0 +1,159 @@
+<div class="overflow-y-auto overflow-x-hidden max-h-screen justify-center items-center md:h-full -m-6">
+    <div class="w-full max-w-2xl h-full md:h-auto">
+        <!-- Content-->
+        <div class="bg-white rounded-lg shadow">
+            <form [formGroup]="productForm">
+                <!-- Header -->
+                <div
+                    class="flex justify-center items-start p-5 rounded-t border-b-4 bg-esmerald border-greenEsmeraldDark">
+                    <h3 class="text-xl font-semibold text-white lg:text-2xl">
+                        {{namePage}} Producto
+                    </h3>
+                </div>
+                <!-- Body -->
+                <div class="p-6 pb-2 space-y-6">
+                    <p class="text-base leading-relaxed text-gray-500">
+                        Detalle de Producto
+                    </p>
+                    <div class="overflow-x-auto">
+                        <div class="flex flex-col sm:flex-row w-full justify-start">
+                            <div class="sm:w-auto">
+                                <div class="grid grid-cols-1 w-full">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-2 px-10 pt-4">
+
+
+
+                                        <div class="w-full sm:col-span-2">
+                                            <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                    Producto
+                                                </mat-label>
+
+                                                <input [formControlName]="'Producto'" matInput
+                                                    [placeholder]="'Producto'" type="text" />
+                                                <mat-icon matPrefix [svgIcon]="'heroicons_outline:identification'">
+                                                </mat-icon>
+                                                <mat-error *ngIf="
+                                                        this.productForm.get('Producto').invalid
+                                                    ">
+                                                    {{
+                                                    this.formGroupError.getErrorValidateMessage(
+                                                    productForm,
+                                                    "Producto"
+                                                    )
+                                                    }}
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class=" w-full sm:col-span-2">
+                                            <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                    Cantidad (Libras) *
+                                                </mat-label>
+
+                                                <input formControlName="cantidad" matInput [placeholder]="
+                                                        'Cantidad (Libras)'
+                                                    " type="number" min="0" />
+                                                <mat-icon matPrefix [svgIcon]="
+                                                        'iconsmind:bag_quantity'
+                                                    ">
+                                                </mat-icon>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="w-full sm:w-60">
+                                            <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                    Tara de Saco
+                                                </mat-label>
+                                                <mat-select matInput [formControlName]="'tara_saco'"
+                                                    [placeholder]="'Tara de Saco' ">
+
+                                                    <mat-option [value]="''">
+                                                        Seleccione
+                                                    </mat-option>
+
+                                                </mat-select>
+
+                                                <mat-icon matPrefix [svgIcon]="'iconsmind:wheelbarrow'">
+                                                </mat-icon>
+                                                <mat-error *ngIf="
+                                                        this.productForm.get('tara_saco').invalid
+                                                    ">
+                                                    {{
+                                                    this.formGroupError.getErrorValidateMessage(
+                                                    productForm,
+                                                    "tara_saco"
+                                                    )
+                                                    }}
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="w-full sm:w-60">
+                                            <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                    Libras de tara *
+                                                </mat-label>
+
+                                                <input formControlName="libra_tara" matInput [placeholder]="
+                                                        'Libras de tara'
+                                                    " type="number" min="0" />
+                                                <mat-icon matPrefix [svgIcon]="
+                                                        'heroicons_outline:currency-pound'
+                                                    ">
+                                                </mat-icon>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class=" w-full sm:w-60">
+                                            <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                                <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                    Cantidad (Sacos)
+                                                </mat-label>
+
+                                                <input formControlName="cantidad_sacos" matInput [placeholder]="
+                                                        'Cantidad (Sacos)'
+                                                    " type="number" min="0" />
+                                                <mat-icon matPrefix [svgIcon]="
+                                                        'iconsmind:bag_quantity'
+                                                    ">
+                                                </mat-icon>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="flex items-center w-full sm:w-60">
+
+                                            <mat-checkbox  [formControlName]="'varios_sacos'" color="primary">
+                                                Varios Sacos con el mismo Peso.
+                                            </mat-checkbox>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Footer -->
+                <div class="flex justify-center items-center p-6 space-x-2 rounded-b">
+                    <button mat-flat-button type="submit" [disabled]="this.productForm.invalid" [color]="'primary'">
+                        <ng-container *ngIf="!isLoading">
+                            <mat-icon class="mr-1" svgIcon="heroicons_outline:badge-check"></mat-icon>
+                            <span>Agregar </span>
+                        </ng-container>
+                    </button>
+                    <button type="button" mat-flat-button [color]="'warn'" (click)="closeDialog()">
+                        <ng-container *ngIf="!isLoading">
+                            <mat-icon class="mr-1" svgIcon="heroicons_outline:rewind"></mat-icon>
+                            <span>Cancelar </span>
+                        </ng-container>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

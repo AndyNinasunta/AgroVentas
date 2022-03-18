@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroupError } from 'app/shared/class/validator-functions';
+import { RecipientI } from '../../interfaces/weigher-combo.interface';
+import { PesajeDetalleI } from '../../interfaces/weigher.interface';
+import { WeigherService } from '../../services/weigher.service';
 
 @Component({
   selector: 'app-form-product',
@@ -9,15 +13,21 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class FormProductComponent implements OnInit {
 
+  formGroupError = new FormGroupError();
   isLoading: boolean = false;
   productForm: FormGroup;
 
-  @Output() productResponse: EventEmitter<any> = new EventEmitter<any>();
+  recipientCombo: RecipientI[];
+
+  tara_saco: string;
+
+  @Output() productResponse: EventEmitter<PesajeDetalleI> = new EventEmitter<PesajeDetalleI>();
 
   namePage: string = '';
 
   constructor(public matRef: MatDialogRef<FormProductComponent>,
     private fBuilder: FormBuilder,
+    private weigherService: WeigherService,
     @Inject(MAT_DIALOG_DATA) public data?: any) { }
 
   ngOnInit(): void {
@@ -29,33 +39,64 @@ export class FormProductComponent implements OnInit {
       this.namePage = 'Nuevo';
     }
 
-    
+
+    this.getRecipient();
 
     this.productForm = this.createProductForm();
 
     this.productForm.get('varios_sacos')
-    .valueChanges
-    .subscribe((res)=>{
-      if(res){
-        this.productForm.get('cantidad_sacos').enable();
-      }else{
-        this.productForm.get('cantidad_sacos').setValue('');
-        this.productForm.get('cantidad_sacos').disable();
-      }
-    });
+      .valueChanges
+      .subscribe((res) => {
+        if (res) {
+          this.productForm.get('cantidad_sacos').enable();
+        } else {
+          this.productForm.get('cantidad_sacos').setValue('');
+          this.productForm.get('cantidad_sacos').disable();
+        }
+      });
 
+  }
+
+  getRecipient() {
+
+    this.weigherService.getRecipient()
+      .subscribe((res) => {
+
+        if (res) {
+          this.recipientCombo = res;
+          console.log(res);
+        }
+      },
+        (err) => {
+          console.log(err);
+        });
   }
 
   createProductForm(): FormGroup {
     return this.fBuilder.group({
-      ID: [{ value: '', disabled: false }],
-      Producto: [{ value: '', disabled: false }],
-      cantidad: [{ value: '', disabled: false }],
-      tara_saco: [{ value: '', disabled: false }],
-      libra_tara: [{ value: '', disabled: false }],
-      cantidad_sacos: [{ value: '', disabled: true }],
-      varios_sacos: [{ value: '', disabled: false }],
+      id: [{ value: '1', disabled: false }],
+      producto: [{ value: 'Cacao', disabled: true }, [Validators.required]],
+      cantidad: [{ value: '', disabled: false }, [Validators.required]],
+      id_tara_saco: [{ value: '', disabled: false }, [Validators.required]],
+      libra_tara: [{ value: '', disabled: false }, [Validators.required]],
+      cantidad_sacos: [{ value: '', disabled: true }, [Validators.required]],
+      varios_sacos: [{ value: false, disabled: false }],
     });
+  }
+
+  setDescrTara(event: any): void {
+    this.tara_saco = event;
+    console.log(event);
+  }
+
+  saveProduct(): void {
+
+    let productAux = JSON.parse(JSON.stringify(this.productForm.getRawValue()));
+
+    productAux.tara_saco = this.tara_saco;
+    console.log(productAux);
+    this.productResponse.emit(productAux);
+    this.closeDialog();
   }
 
   closeDialog(): void {

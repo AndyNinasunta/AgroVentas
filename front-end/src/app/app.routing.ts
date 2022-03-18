@@ -142,7 +142,15 @@ export const appRoutes: Route[] = [
             },
             {
                 path: 'cash-register',
-                children: [],
+                children: [
+                    {
+                        path: 'payment',
+                        loadChildren: () =>
+                            import('app/modules/cash-register/pay-product/pay-product.module').then(
+                                (m) => m.PayProductModule
+                            ),
+                    }
+                ],
             },
             {
                 path: 'client',

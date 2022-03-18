@@ -6,9 +6,11 @@ import { PesajeDetalleI, TicketI } from '../../interfaces/weigher.interface';
 import { FormProductComponent } from '../form-product/form-product.component';
 import { WeigherService } from '../../services/weigher.service'
 import { StateCoatI, VarietysI } from '../../interfaces/weigher-combo.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TicketGeneratorService } from 'app/modules/client/ticket-generator/services/ticket-generator.service';
 import { ValidCI } from 'app/shared/validators/identification.validator';
+import { FormGroupError } from 'app/shared/class/validator-functions';
+import { AuthService } from 'app/core/auth/auth.service';
 
 export interface PeriodicElement {
     name: string;
@@ -17,18 +19,6 @@ export interface PeriodicElement {
     symbol: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-    { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-    { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-    { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-    { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-    { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-    { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-    { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-    { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-    { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-    { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
 
 @Component({
     selector: 'app-attend-ticket',
@@ -36,36 +26,46 @@ const ELEMENT_DATA: PeriodicElement[] = [
     styleUrls: ['./attend-ticket.component.scss'],
 })
 export class AttendTicketComponent implements OnInit {
+    formGroupError = new FormGroupError();
     userForm: FormGroup;
+    pendTicketForm: FormGroup;
     dataSource = new MatTableDataSource();
 
     id_ticket: string;
+
+    variety: string = '';
 
     stateCoat: StateCoatI[];
     varietys: VarietysI[];
 
     pesajeDetailColumns: string[] = [
         'acciones',
-        'rowNumber',
+        'id',
         'producto',
-        'variedad',
         'detalle',
         'cantidad',
-        'tara',
-        'librasTara',
+        'tara_saco',
+        'libra_tara',
     ];
 
     pesajeDetails: PesajeDetalleI[] = [];
 
+    user:any;
+
     constructor(private matDialog: MatDialog, private fBuilder: FormBuilder,
         private weigherService: WeigherService,
         private ticketGeneratorService: TicketGeneratorService,
-        private route: ActivatedRoute,) { }
+        private route: ActivatedRoute, private router: Router,
+        private userServ:AuthService,) { }
 
     ngOnInit(): void {
-        this.id_ticket = this.route.snapshot.params.id;
+        this.user=JSON.parse(this.userServ.user);
+        console.log(this.user.usrid,'id');
+
+        this.id_ticket = this.route.snapshot.params.cod;
         this.userForm = this.createUserForm();
-        // this.getInformationTicket();
+        this.pendTicketForm = this.createPendTicket();
+        this.getInformationTicket();
         this.dataSource = new MatTableDataSource(this.pesajeDetails);
 
         this.getStateCoat();
@@ -73,25 +73,20 @@ export class AttendTicketComponent implements OnInit {
 
     getInformationTicket() {
 
+
         this.weigherService.getInfTicket(this.id_ticket)
             .subscribe((res) => {
 
-                this.ticketGeneratorService.searchUser(res[0].ruc)
-                    .subscribe((res) => {
-                        if (res) {
-                            console.log(res);
-                            this.userForm.patchValue(res);
-                            // this.userForm.get('ruc').disable();
-                            // this.userForm.get('cliente').disable();
-                            // this.userForm.get('mail').disable();
-                            // this.userForm.get('direccion').disable();
-                            // this.userForm.get('telefono').disable();
-                        }
+                // this.ticketGeneratorService.searchUser(res[0].ruc)
+                //     .subscribe((res) => {
+                if (res) {
+                    this.userForm.patchValue(res);
+                }
 
-                    },
-                        (err) => {
-                            console.log(err);
-                        });
+                // },
+                //     (err) => {
+                //         console.log(err);
+                //     });
 
             },
                 (err) => {
@@ -130,27 +125,134 @@ export class AttendTicketComponent implements OnInit {
 
     }
 
+    setVariety(data: string): void {
+        this.variety = data;
+    }
+
     createUserForm(): FormGroup {
         return this.fBuilder.group({
             ruc: [
-                { value:'', disabled: true },
+                { value: '', disabled: true },
                 [ValidCI, Validators.required],
             ],
-            cliente: [{value:'', disabled: true }, [Validators.required]],
+            cliente: [{ value: '', disabled: true }, [Validators.required]],
             mail: [
-                {value:'', disabled: true },
+                { value: '', disabled: true },
                 [Validators.required, Validators.email],
             ],
-            direccion: [{ value:'',disabled: true }, [Validators.required]],
-            telefono: [{ value:'',disabled: true }, [Validators.required]],
+            direccion: [{ value: '', disabled: true }, [Validators.required]],
+            telefono: [{ value: '', disabled: true }, [Validators.required]],
             // quantityProducts: ['', []],
         });
+    }
+
+    createPendTicket(): FormGroup {
+        return this.fBuilder.group({
+            variedadid: [
+                { value: '', disabled: false },
+                [Validators.required],
+            ],
+            estadoid: [{ value: '', disabled: false }, [Validators.required]],
+            calificacion: [{ value: '', disabled: false }, [Validators.required]],
+            // precio: [{ value: '', disabled: false }, [Validators.required]],
+            // pesadorid: [{ value: '', disabled: false }, [Validators.required]],
+            // productoid: [{ value: '', disabled: false }, [Validators.required]],
+            detalle: [{ value: '', disabled: false }, [Validators.required]],
+            // cantidad: [{ value: '', disabled: false }, [Validators.required]],
+            // recipienteid: [{ value: '', disabled: false }, [Validators.required]],
+            // pesorecipiente: [{ value: '', disabled: false }, [Validators.required]],
+
+        });
+    }
+
+    updateTable(): void {
+        this.pendTicketForm.get('detalle').setValue(this.pesajeDetails);
+        this.dataSource = new MatTableDataSource(this.pesajeDetails);
+    }
+
+    attendTicket() {
+
+        let attendTicketAux = JSON.parse(JSON.stringify(this.pendTicketForm.getRawValue()));
+
+        for (let index = 0; index < this.pesajeDetails.length; index++) {
+
+
+            //Consumo
+            attendTicketAux.calificacion = Number(attendTicketAux.calificacion);
+            attendTicketAux.estadoid = Number(attendTicketAux.estadoid);
+            attendTicketAux.variedadid = Number(attendTicketAux.variedadid);
+
+            attendTicketAux.rcd=this.id_ticket;
+            attendTicketAux.pesadorid = Number(this.user.usrid); //int
+            attendTicketAux.productoid = Number(this.pesajeDetails[index].id); //int
+            attendTicketAux.detalle = this.pesajeDetails[index].detalle;//String
+            attendTicketAux.cantidad = this.pesajeDetails[index].cantidad;//double
+            attendTicketAux.recipienteid = this.pesajeDetails[index].id_tara_saco; //int
+            attendTicketAux.pesorecipiente = this.pesajeDetails[index].libra_tara;//double
+            
+            attendTicketAux.precio=96;
+
+
+            this.weigherService.generatePesaje(attendTicketAux)
+            .subscribe((res)=>{
+                console.log(res);
+            },(err)=>{
+                console.log(err);
+            })
+
+            console.log(attendTicketAux);
+
+
+        }
+
+
+
+
+        // precio: [{ value: '', disabled: false }, [Validators.required]],
+        // pesadorid: [{ value: '', disabled: false }, [Validators.required]],
+        // productoid: [{ value: '', disabled: false }, [Validators.required]],
+        // detalle: [{ value: '', disabled: false }, [Validators.required]],
+        // cantidad: [{ value: '', disabled: false }, [Validators.required]],
+        // recipienteid: [{ value: '', disabled: false }, [Validators.required]],
+        // pesorecipiente: [{ value: '', disabled: false }, [Validators.required]],
+
+
+    }
+
+    goToPendTicket(): void {
+        this.router.navigate([`/weigher/tickets`]);
     }
 
     openDialogProduct(data?: any) {
         const dialogDetail = this.matDialog.open(FormProductComponent, {
             data: data,
             disableClose: false
-        });
+        }).componentInstance.productResponse
+            .subscribe((res) => {
+                if (res) {
+
+                    if (res.varios_sacos) {
+                        for (let index = 0; index < res.cantidad_sacos; index++) {
+
+                            res.detalle = `${res.libra_tara} Libras de ${res.producto} ${this.variety} Recibido en ${res.tara_saco}`;
+
+                            this.pesajeDetails.push(res);
+
+
+
+                        }
+
+                    } else {
+
+                        res.detalle = `${res.libra_tara} Libras de ${res.producto} ${this.variety} Recibido en ${res.tara_saco}`;
+
+                        this.pesajeDetails.push(res);
+
+                    }
+
+                    this.updateTable();
+
+                }
+            });
     }
 }

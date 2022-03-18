@@ -16,6 +16,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'heroicons_outline:scale',
         link: 'weigher/tickets/list-tickets',
     },
+    {
+        id: 'cash-register',
+        title: 'Cobrar Productos',
+        type: 'basic',
+        icon: 'heroicons_outline:scale',
+        link: 'cash-register/payment/list-pay-product',
+    },
 ];
 export const compactNavigation: FuseNavigationItem[] = [
     {

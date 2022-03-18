@@ -21,7 +21,7 @@ export class AuthService {
     constructor(
         private _httpClient: HttpClient,
         private _userService: UserService
-    ) {}
+    ) { }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors
@@ -45,6 +45,7 @@ export class AuthService {
         let user = {
             nombre: res.nombre,
             rolus: res.rolus,
+            usrid: res.usrid
         };
 
         localStorage.setItem('user', JSON.stringify(user));
@@ -101,7 +102,7 @@ export class AuthService {
                     if (response.rolus !== 'Sin acceso') {
                         // Store the access token in the local storage
                         this.accessToken =
-                            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dyt0CoTl4WoVjAHI9Q_CwSKhl6d_9rhM3NrXuJttkao';
+                            'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6NjQwNjcyNzEyMTUsImlhdCI6MTY0NzU5MTIxNX0.2Rqt4g3tj5U6-nzW7gknHgPXD7W7bzbBigN_eRM1-o0';
 
                         // Set the authenticated flag to true
                         this._authenticated = true;
@@ -132,7 +133,7 @@ export class AuthService {
                 ),
                 switchMap((response: any) => {
                     // Store the access token in the local storage
-                    this.accessToken = response.accessToken;
+                    this.accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6NjQwNjcyNzEyMTUsImlhdCI6MTY0NzU5MTIxNX0.2Rqt4g3tj5U6-nzW7gknHgPXD7W7bzbBigN_eRM1-o0';
 
                     // Set the authenticated flag to true
                     this._authenticated = true;

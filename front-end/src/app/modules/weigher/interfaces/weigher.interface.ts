@@ -7,12 +7,17 @@ export interface TicketI {
     cantTentSacos: number;
 }
 
+
+
+
 export interface PesajeDetalleI {
-    rowNumber: number;
+    id: string;
     producto: string;
-    variedad: string;
-    detalle: string;
     cantidad: number;
-    tara: string;
-    librasTara: number;
+    id_tara_saco: number;
+    libra_tara: number;
+    cantidad_sacos: number;
+    varios_sacos: boolean;
+    tara_saco?: string;
+    detalle?:string;
 }

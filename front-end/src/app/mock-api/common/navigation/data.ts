@@ -8,6 +8,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:ticket',
         link: 'ticket',
+        role: 'TODOS'
     },
     {
         id: 'weigher',
@@ -15,13 +16,15 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:scale',
         link: 'weigher/tickets/list-tickets',
+        role: 'PESADOR'
     },
     {
         id: 'cash-register',
         title: 'Cobrar Productos',
         type: 'basic',
-        icon: 'heroicons_outline:scale',
+        icon: 'heroicons_outline:cash',
         link: 'cash-register/payment/list-pay-product',
+        role: 'CAJA'
     },
 ];
 export const compactNavigation: FuseNavigationItem[] = [

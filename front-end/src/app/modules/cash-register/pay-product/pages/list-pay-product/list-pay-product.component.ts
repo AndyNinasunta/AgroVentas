@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
+import { PayProductComponent } from '../../components/pay-product/pay-product.component';
 
 @Component({
   selector: 'app-list-pay-product',
@@ -25,9 +28,16 @@ export class ListPayProductComponent implements OnInit {
     'hrrmn',
   ];
 
-  constructor() { }
+  constructor(private matDialog: MatDialog, private fBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
   }
 
+
+  openDialogPay(): void {
+    const dialogDetail = this.matDialog.open(PayProductComponent, {
+      // data: data,
+      disableClose: false
+    });
+  }
 }

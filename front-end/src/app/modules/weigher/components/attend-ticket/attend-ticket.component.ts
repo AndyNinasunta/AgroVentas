@@ -11,6 +11,7 @@ import { TicketGeneratorService } from 'app/modules/client/ticket-generator/serv
 import { ValidCI } from 'app/shared/validators/identification.validator';
 import { FormGroupError } from 'app/shared/class/validator-functions';
 import { AuthService } from 'app/core/auth/auth.service';
+import Swal from 'sweetalert2';
 
 export interface PeriodicElement {
     name: string;
@@ -50,17 +51,17 @@ export class AttendTicketComponent implements OnInit {
 
     pesajeDetails: PesajeDetalleI[] = [];
 
-    user:any;
+    user: any;
 
     constructor(private matDialog: MatDialog, private fBuilder: FormBuilder,
         private weigherService: WeigherService,
         private ticketGeneratorService: TicketGeneratorService,
         private route: ActivatedRoute, private router: Router,
-        private userServ:AuthService,) { }
+        private userServ: AuthService,) { }
 
     ngOnInit(): void {
-        this.user=JSON.parse(this.userServ.user);
-        console.log(this.user.usrid,'id');
+        this.user = JSON.parse(this.userServ.user);
+        console.log(this.user.usrid, 'id');
 
         this.id_ticket = this.route.snapshot.params.cod;
         this.userForm = this.createUserForm();
@@ -182,39 +183,31 @@ export class AttendTicketComponent implements OnInit {
             attendTicketAux.estadoid = Number(attendTicketAux.estadoid);
             attendTicketAux.variedadid = Number(attendTicketAux.variedadid);
 
-            attendTicketAux.rcd=this.id_ticket;
+            attendTicketAux.rcd = this.id_ticket;
             attendTicketAux.pesadorid = Number(this.user.usrid); //int
             attendTicketAux.productoid = Number(this.pesajeDetails[index].id); //int
             attendTicketAux.detalle = this.pesajeDetails[index].detalle;//String
             attendTicketAux.cantidad = this.pesajeDetails[index].cantidad;//double
             attendTicketAux.recipienteid = this.pesajeDetails[index].id_tara_saco; //int
             attendTicketAux.pesorecipiente = this.pesajeDetails[index].libra_tara;//double
-            
-            attendTicketAux.precio=96;
+
+            attendTicketAux.precio = 96;
 
 
             this.weigherService.generatePesaje(attendTicketAux)
-            .subscribe((res)=>{
-                console.log(res);
-            },(err)=>{
-                console.log(err);
-            })
+                .subscribe((res) => {
+                    console.log(res);
+                }, (err) => {
+                    console.log(err);
+                    this.showAlertResponse('500');
+                })
 
             console.log(attendTicketAux);
 
-
+            if (index === this.pesajeDetails.length - 1) {
+                this.showAlertResponse('200');
+            }
         }
-
-
-
-
-        // precio: [{ value: '', disabled: false }, [Validators.required]],
-        // pesadorid: [{ value: '', disabled: false }, [Validators.required]],
-        // productoid: [{ value: '', disabled: false }, [Validators.required]],
-        // detalle: [{ value: '', disabled: false }, [Validators.required]],
-        // cantidad: [{ value: '', disabled: false }, [Validators.required]],
-        // recipienteid: [{ value: '', disabled: false }, [Validators.required]],
-        // pesorecipiente: [{ value: '', disabled: false }, [Validators.required]],
 
 
     }
@@ -254,5 +247,56 @@ export class AttendTicketComponent implements OnInit {
 
                 }
             });
+    }
+
+    /**
+* Show Alert Response
+* @param type 
+* @param message 
+*/
+    showAlertResponse(type: string): void {
+
+        switch (type) {
+            // mensaje de exito	
+            case '200':
+
+                Swal.fire({
+                    position: 'center',
+                    width: "500px",
+                    icon: 'success',
+                    title: "Transacción realizada con éxito",//title: message,
+                    customClass: {
+                        popup: 'swal-border-popup',
+                        icon: 'swal-border-icon',
+                        title: 'swal-title',
+                    },
+                    showConfirmButton: false,
+                    timer: 3000,
+                });
+                this.goToPendTicket();
+                break;
+            //mensaje de error 
+            case '500':
+
+                Swal.fire({
+                    position: 'center',
+                    width: "500px",
+                    iconHtml: 'error',
+                    title: 'Ocurrió un Problema al ejecutar la transacción.',//title: message,
+                    customClass: {
+                        popup: 'swal-border-popup',
+                        icon: 'swal-border-icon',
+                        title: 'swal-title',
+                        //actions:'swal-button-confirm',
+                    },
+                    showConfirmButton: true,
+                    confirmButtonColor: '#22d3ee',
+                    //timer:3000,
+
+                });
+
+                break;
+
+        }
     }
 }

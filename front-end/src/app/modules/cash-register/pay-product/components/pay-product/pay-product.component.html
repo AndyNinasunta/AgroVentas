@@ -1,1 +1,167 @@
-<p>pay-product works!</p>
+<div class="overflow-y-auto overflow-x-hidden max-h-screen justify-center items-center md:h-full -m-6">
+    <div class="w-full max-w-2xl h-full md:h-auto">
+        <!-- Content-->
+        <div class="bg-white rounded-lg shadow">
+            <form [formGroup]="payForm">
+                <!-- Header -->
+                <div
+                    class="flex justify-center items-start p-5 rounded-t border-b-4 bg-esmerald border-greenEsmeraldDark">
+                    <h3 class="text-xl font-semibold text-white lg:text-2xl">
+                        Pago
+                    </h3>
+                </div>
+                <!-- Body -->
+                <div class="p-6 pb-2 space-y-6">
+                    <div class="flex justify-between">
+                        <p class="flex text-base leading-relaxed text-gray-500">
+                            Detalle del Pago
+                        </p>
+                        <p class=" flex text-base text-right leading-relaxed text-gray-500">
+                            Precio Actual del Saco: <strong class="text-esmerald"> 98$ </strong>
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row w-full justify-start">
+                        <div class="sm:w-auto">
+                            <div class="grid grid-cols-1 w-full">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-2 px-10 pt-4">
+
+                                    <div class="w-full sm:w-60">
+                                        <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                            <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                # Ticket
+                                            </mat-label>
+                                            <input [formControlName]="'id_ticket'" matInput [placeholder]="'# Ticket'"
+                                                type="text" />
+
+                                            <mat-icon matPrefix [svgIcon]="'heroicons_outline:hashtag'">
+                                            </mat-icon>
+
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="w-full sm:w-60">
+                                        <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                            <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                Cédula/Ruc Cliente *
+                                            </mat-label>
+
+                                            <input [formControlName]="'identificacion'" matInput
+                                                [placeholder]="'Cédula/Ruc Cliente'" type="text" />
+
+                                            <mat-icon matPrefix [svgIcon]="'heroicons_outline:identification'">
+                                            </mat-icon>
+
+
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class=" w-full sm:col-span-2">
+                                        <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                            <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                Nombres
+                                            </mat-label>
+
+                                            <input [formControlName]="'nombre'" matInput [placeholder]="'Nombres'"
+                                                type="text" />
+
+                                            <mat-icon matPrefix [svgIcon]="'heroicons_outline:user'">
+                                            </mat-icon>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="w-full sm:w-60">
+                                        <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                            <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                Peso
+                                            </mat-label>
+                                            <input [formControlName]="'peso'" matInput [placeholder]="'Peso'"
+                                                type="text" />
+
+                                            <mat-icon matPrefix [svgIcon]="'iconsmind:wheelbarrow'">
+                                            </mat-icon>
+
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="w-full sm:w-60">
+                                        <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                            <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                Calificación del Pesado
+                                            </mat-label>
+
+                                            <input [formControlName]="'calificacion'" matInput type="text" />
+
+                                            <mat-icon matPrefix [svgIcon]="'heroicons_solid:clipboard-check'">
+                                            </mat-icon>
+
+
+                                        </mat-form-field>
+                                    </div>
+
+
+                                    <div class="w-full sm:w-60">
+                                        <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                            <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                Total
+                                            </mat-label>
+                                            <input [formControlName]="'total'" matInput [placeholder]="'Total'"
+                                                type="text" />
+
+
+                                            <mat-icon matPrefix [svgIcon]="'heroicons_solid:cash'">
+                                            </mat-icon>
+
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="w-full sm:w-60">
+                                        <mat-form-field class="flex-auto w-full px-2 fuse-mat-dense">
+                                            <mat-label class="mb-2 text-base font-medium text-esmeraldDark">
+                                                Formas de Pago
+                                            </mat-label>
+
+                                            <mat-select [formControlName]="'forma_pago'" matInput
+                                                [placeholder]="'Formas de Pago'">
+
+                                                <mat-option [value]="''">
+                                                    Seleccione
+                                                </mat-option>
+                                                <!-- 
+                                                <mat-option (click)="setVariety(item.variedad)"
+                                                    *ngFor="let item of varietys" [value]="item.variedadid">
+                                                    {{item.variedad}}
+                                                </mat-option> -->
+
+                                            </mat-select>
+
+                                            <mat-icon matPrefix [svgIcon]="'payments'">
+                                            </mat-icon>
+
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Footer -->
+                <div class="flex justify-center items-center p-6 space-x-2 rounded-b">
+                    <button mat-flat-button type="submit" (click)="payTicket()" [disabled]="payForm.invalid"
+                        [color]="'primary'">
+                        <ng-container>
+                            <mat-icon class="mr-1" svgIcon="heroicons_outline:badge-check"></mat-icon>
+                            <span>Pagar</span>
+                        </ng-container>
+                    </button>
+                    <button type="button" (click)="closeDialog()" mat-flat-button [color]="'warn'">
+                        <ng-container>
+                            <mat-icon class="mr-1" svgIcon="heroicons_outline:rewind"></mat-icon>
+                            <span>Cancelar </span>
+                        </ng-container>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

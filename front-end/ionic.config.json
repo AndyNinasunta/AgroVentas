@@ -1,0 +1,8 @@
+{
+  "name": "agroventas-cp",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

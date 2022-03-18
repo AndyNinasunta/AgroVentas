@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "agroventas-cp",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

@@ -1,0 +1,7 @@
+{
+  "name": "agroventas-cp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

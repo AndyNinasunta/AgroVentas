@@ -39,4 +39,16 @@ public interface ProcessRepository extends JpaRepository<RootEntity, Integer> {
 
     @Query(value = "SELECT * FROM fnpaycash(cast(:#{#pay.rmnid} as bigint), cast(:#{#pay.cajero} as bigint), cast(:#{#pay.payvalue} as numeric), cast(:#{#pay.paymth} as integer))", nativeQuery = true)
     PayCashResponse payCash(@Param("pay") PayCashRequest pay);
+
+    @Query(value = "SELECT * FROM fnpesados()", nativeQuery = true)
+    List<ListTicketsPayPendResponse> getWeighedTickets();
+
+    @Query(value = "SELECT * FROM fnpendientepagoticket(:idticket) LIMIT 1", nativeQuery = true)
+    TicketDataPaymentResponse getTicketDataForPayment(@Param("tickt") String idticket);
+
+    @Query(value = "SELECT * FROM fnnoatendidos(:idnt)", nativeQuery = true)
+    List<TicketsNotWeighedResponse> getNotWeighedTicketsByUser(@Param("idnt") String idnt);
+
+    @Query(value = "SELECT * FROM fnhistoricromanate(:idnt)", nativeQuery = true)
+    List<ListProcessedTicletsHistoryByUserResponse> getProcessedTicketsByUser(@Param("idnt") String idnt);
 }

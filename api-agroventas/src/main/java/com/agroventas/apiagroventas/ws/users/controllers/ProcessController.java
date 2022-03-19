@@ -71,4 +71,24 @@ public class ProcessController {
         System.out.println("Recibido " + message.toString());
         return message;
     }
+
+    @RequestMapping(value = "wWeighedTickets", method = RequestMethod.GET)
+    public List<ListTicketsPayPendResponse> getWeighedTickets(){
+        return processService.getWeighedTickets();
+    }
+
+    @RequestMapping(value = "wTicketDataPayment", method = RequestMethod.GET)
+    public TicketDataPaymentResponse getTicketDataForPayment(@RequestParam String idticket){
+        return processService.getTicketDataForPayment(idticket);
+    }
+
+    @RequestMapping(value = "wNotWeighedTickets", method = RequestMethod.GET)
+    public List<TicketsNotWeighedResponse> getNotWeighedTicketsByUser(@RequestParam String idnt){
+        return processService.getNotWeighedTicketsByUser(idnt);
+    }
+
+    @RequestMapping(value = "wProcessedTickets", method = RequestMethod.GET)
+    public List<ListProcessedTicletsHistoryByUserResponse> getProcessedTicketsByUser(@RequestParam String idnt){
+        return processService.getProcessedTicketsByUser(idnt);
+    }
 }

@@ -64,7 +64,7 @@ export class FormProductComponent implements OnInit {
         console.log(res);
         if (res) {
           this.productForm.get('libra_tara').setValue(Number(res.peso) * 2, 205);
-          this.calf = 434;
+          this.calf = res.humedad;
         }
       },
         (err) => {

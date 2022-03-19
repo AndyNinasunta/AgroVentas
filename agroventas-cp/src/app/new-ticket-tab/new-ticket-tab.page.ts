@@ -7,13 +7,22 @@ import { StorageService } from '../shared/storage.service';
   styleUrls: ['./new-ticket-tab.page.scss'],
 })
 export class NewTicketTabPage implements OnInit {
-  user = '';
 
-  constructor(private storage: StorageService) {}
+
+  u = '';
+
+  constructor(private storage: StorageService) { }
 
   ngOnInit() {
-    this.storage.get('user').then((res) => {
-      this.user = res;
-    });
+    this.user.then((res) => {
+      this.u = res;
+    })
+    console.log(this.u);
   }
+
+  get user(): Promise<any> {
+
+    return this.storage.get('user');
+  };
+
 }

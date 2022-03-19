@@ -24,30 +24,17 @@
                 >Log In</ion-button
               > -->
               <ion-item>
-                <ion-label position="floating"
-                  >Id number/RUC<ion-text color="danger">*</ion-text></ion-label
-                >
-                <ion-input
-                  required
-                  formControlName="userIdDoc"
-                  type="text"
-                  maxlength="13"
-                  minlength="10"
-                ></ion-input>
+                <ion-label position="floating">Id number/RUC<ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required formControlName="userIdDoc" type="text" maxlength="13" minlength="10"></ion-input>
               </ion-item>
-              <ion-item
-                color="light"
-                *ngIf="userLoginForm.invalid && userLoginForm.touched"
-                lines="none"
-              >
+              <ion-item color="light" *ngIf="userLoginForm.invalid && userLoginForm.touched" lines="none">
                 <ion-text color="danger" class="form-error">
                   Please enter a valid document
                 </ion-text>
               </ion-item>
 
-              <ion-button expand="block" (click)="logInUser()"
-                >Log In</ion-button
-              >
+              <ion-button expand="block" (click)="logInUser()">Log In</ion-button>
             </form>
           </ion-card-content>
         </ion-card>

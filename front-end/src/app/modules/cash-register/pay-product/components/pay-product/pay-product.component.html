@@ -126,17 +126,17 @@
                                                 <mat-option [value]="''">
                                                     Seleccione
                                                 </mat-option>
-                                                <!-- 
-                                                <mat-option (click)="setVariety(item.variedad)"
-                                                    *ngFor="let item of varietys" [value]="item.variedadid">
-                                                    {{item.variedad}}
-                                                </mat-option> -->
 
+                                                <mat-option *ngFor="let item of payType" [value]="item.codigo">
+                                                    {{item.descripcion}}
+                                                </mat-option>
                                             </mat-select>
 
                                             <mat-icon matPrefix [svgIcon]="'payments'">
                                             </mat-icon>
-
+                                            <mat-error *ngIf="this.payForm.get('forma_pago').invalid">
+                                                {{this.formGroupError.getErrorValidateMessage(payForm,"forma_pago") }}
+                                            </mat-error>
                                         </mat-form-field>
                                     </div>
                                 </div>

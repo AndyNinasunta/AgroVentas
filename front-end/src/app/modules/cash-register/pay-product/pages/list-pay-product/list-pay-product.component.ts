@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
 import { PayProductComponent } from '../../components/pay-product/pay-product.component';
+import { PayProductService } from '../../services/pay-product.service';
 
 @Component({
   selector: 'app-list-pay-product',
@@ -28,7 +29,7 @@ export class ListPayProductComponent implements OnInit {
     'hrrmn',
   ];
 
-  constructor(private matDialog: MatDialog, private fBuilder: FormBuilder,) { }
+  constructor(private payProductService: PayProductService, private matDialog: MatDialog, private fBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
   }

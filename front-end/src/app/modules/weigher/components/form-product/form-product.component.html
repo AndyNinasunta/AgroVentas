@@ -67,6 +67,10 @@
                                                         'iconsmind:bag_quantity'
                                                     ">
                                             </mat-icon>
+
+                                            <mat-progress-spinner *ngIf="isLoadingWbSocket" [diameter]="20"
+                                                [mode]="'indeterminate'">
+                                            </mat-progress-spinner>
                                             <mat-error *ngIf=" this.productForm.get('cantidad').invalid ">
                                                 {{
                                                 this.formGroupError.getErrorValidateMessage(
@@ -127,10 +131,6 @@
                                                     ">
                                             </mat-icon>
 
-                                            <mat-progress-spinner *ngIf="isLoadingWbSocket" [diameter]="20"
-                                                [mode]="'indeterminate'">
-                                            </mat-progress-spinner>
-
                                             <mat-error *ngIf=" this.productForm.get('libra_tara').invalid ">
                                                 {{
                                                 this.formGroupError.getErrorValidateMessage(
@@ -156,6 +156,8 @@
                                                         'iconsmind:bag_quantity'
                                                     ">
                                             </mat-icon>
+
+
 
                                             <mat-error *ngIf=" this.productForm.get('cantidad_sacos').invalid ">
                                                 {{

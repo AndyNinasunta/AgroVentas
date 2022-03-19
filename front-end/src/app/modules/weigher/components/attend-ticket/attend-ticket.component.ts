@@ -224,27 +224,36 @@ export class AttendTicketComponent implements OnInit {
             .subscribe((res) => {
                 if (res) {
 
-                    this.pendTicketForm.get('calificacion').setValue(res.calf);
 
-                    if (res.prod.varios_sacos) {
+
+                    if (res.varios_sacos) {
                         for (let index = 0; index < res.cantidad_sacos; index++) {
 
-                            res.detalle = `${res.libra_tara} Libras de ${res.prod.producto} ${this.variety} Recibido en ${res.prod.tara_saco}`;
+                            res.detalle = `${res.libra_tara} Libras de ${res.producto} ${this.variety} Recibido en ${res.tara_saco}`;
 
-                            this.pesajeDetails.push(res.prod);
+                            this.pesajeDetails.push(res);
 
-
+                            console.log(res.calificación);
 
                         }
 
                     } else {
 
-                        res.detalle = `${res.prod.libra_tara} Libras de ${res.prod.producto} ${this.variety} Recibido en ${res.prod.tara_saco}`;
+                        res.detalle = `${res.libra_tara} Libras de ${res.producto} ${this.variety} Recibido en ${res.tara_saco}`;
 
-                        this.pesajeDetails.push(res.prod);
+                        this.pesajeDetails.push(res);
 
                     }
 
+                    let suma = 0;
+
+                    this.pesajeDetails.map((res) => {
+                        suma = res.calificación + suma;
+                    });
+
+                    const avg = (suma / this.pesajeDetails.length) || 0;
+
+                    this.pendTicketForm.get('calificacion').setValue(avg);
                     this.updateTable();
 
                 }

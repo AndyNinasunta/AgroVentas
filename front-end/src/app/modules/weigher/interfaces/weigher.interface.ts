@@ -19,5 +19,6 @@ export interface PesajeDetalleI {
     cantidad_sacos: number;
     varios_sacos: boolean;
     tara_saco?: string;
-    detalle?:string;
+    detalle?: string;
+    calificación?: number;
 }

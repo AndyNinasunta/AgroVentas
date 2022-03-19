@@ -21,7 +21,7 @@ export class FormProductComponent implements OnInit {
   calf: number;
   tara_saco: string;
 
-  @Output() productResponse: EventEmitter<any> = new EventEmitter<any>();
+  @Output() productResponse: EventEmitter<PesajeDetalleI> = new EventEmitter<PesajeDetalleI>();
 
   @Output() califEmition: EventEmitter<number> = new EventEmitter<number>();
 
@@ -63,13 +63,16 @@ export class FormProductComponent implements OnInit {
       this.weigherService.sensordata().subscribe((res) => {
         console.log(res);
         if (res) {
-          this.productForm.get('libra_tara').setValue(Number(res.peso) * 2, 205);
+          this.productForm.get('cantidad').setValue(Number(res.peso) * 2, 205);
           this.calf = res.humedad;
         }
       },
         (err) => {
           console.log('err');
         });
+      // this.productForm.get('cantidad').setValue(2 * 2, 205);
+      // this.calf = Math.random();
+
     }, 3000);
   }
 
@@ -92,9 +95,9 @@ export class FormProductComponent implements OnInit {
     return this.fBuilder.group({
       id: [{ value: '1', disabled: false }],
       producto: [{ value: 'Cacao', disabled: true }, [Validators.required]],
-      cantidad: [{ value: '', disabled: false }, [Validators.required]],
+      cantidad: [{ value: '', disabled: true }, [Validators.required]],
       id_tara_saco: [{ value: '', disabled: false }, [Validators.required]],
-      libra_tara: [{ value: '', disabled: true }, [Validators.required]],
+      libra_tara: [{ value: '', disabled: false }, [Validators.required]],
       cantidad_sacos: [{ value: '', disabled: true }, [Validators.required]],
       varios_sacos: [{ value: false, disabled: false }],
     });
@@ -108,10 +111,10 @@ export class FormProductComponent implements OnInit {
   saveProduct(): void {
 
     let productAux = JSON.parse(JSON.stringify(this.productForm.getRawValue()));
-
+    productAux.calificación = this.calf;
     productAux.tara_saco = this.tara_saco;
     console.log(productAux);
-    this.productResponse.emit({ prod: productAux, calf: this.calf });
+    this.productResponse.emit(productAux);
     this.closeDialog();
   }
 

@@ -30,9 +30,13 @@ export class LoginPage implements OnInit {
     private router: Router,
     private loginService: LoginService,
     private storage: StorageService
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  set user(res: any) {
+    this.storage.set('user', res);
+  }
+
+  ngOnInit() {}
 
   logInUser() {
     if (this.userLoginForm.invalid) {
@@ -45,13 +49,10 @@ export class LoginPage implements OnInit {
       .logInUser(this.userLoginForm.get('userIdDoc').value)
       .subscribe((res) => {
         if (res) {
-          console.log(res);
           this.showToast('Logged In');
           this.storage.remove('user');
-
-          this.user = JSON.stringify(res);
-
-
+          this.storage.setUser(JSON.stringify(res));
+          //this.user = JSON.stringify(res);
           this.router.navigate(['app/tabs/new-ticket-tab']);
         } else {
           this.showToast('The user is not registered or it is inactive.');
@@ -68,19 +69,5 @@ export class LoginPage implements OnInit {
       translucent: true,
     });
     toast.present();
-  }
-
-
-  /**
-     * Setter & getter for access token
-     */
-  set user(res: any) {
-
-
-    this.storage.set('user', res);
-  }
-
-  get user(): string {
-    return localStorage.getItem('user') ?? '';
   }
 }

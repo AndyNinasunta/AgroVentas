@@ -56,7 +56,8 @@ export class PayProductComponent implements OnInit {
     {
       rmnid: Number(this.payForm.get('id_ticket').value),
       cajero: Number(this.user.usrid),
-      payvalue: Number(this.payForm.get('total').value)
+      payvalue: Number(this.payForm.get('total').value),
+      paymth: Number(this.payForm.get('forma_pago').value),
     };
 
     this.payProductService.payProduct(paymentAux).subscribe

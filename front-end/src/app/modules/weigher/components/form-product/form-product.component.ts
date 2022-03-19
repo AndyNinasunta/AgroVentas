@@ -55,6 +55,12 @@ export class FormProductComponent implements OnInit {
         }
       });
 
+    setInterval(() => {
+      this.weigherService.sensordata().subscribe((res) => {
+        console.log(res);
+      });
+    }, 3000);
+
   }
 
   getRecipient() {

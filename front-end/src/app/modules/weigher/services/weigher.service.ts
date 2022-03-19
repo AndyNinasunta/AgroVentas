@@ -70,5 +70,11 @@ export class WeigherService {
       `${environment.urlAddress}/process/wInvalidateTicket?idticket=${id_ticket}`);
   }
 
+  sensordata(): Observable<any> {
+
+    return this.http.get<any>(
+      'http://localhost:8080/DatosSensorws/webresources/wPesajes/wResPesaje'
+    );
+  }
 
 }

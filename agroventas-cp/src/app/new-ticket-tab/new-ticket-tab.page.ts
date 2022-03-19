@@ -19,7 +19,7 @@ export class NewTicketTabPage implements OnInit {
   constructor(
     private newTicketService: NewTicketTabService,
     private storage: StorageService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.user = this.storage.user;
@@ -34,11 +34,11 @@ export class NewTicketTabPage implements OnInit {
   }
 
   generateTicketServ() {
-    this.newTicketService.generateTicket('1250599436001').subscribe(
+    this.newTicketService.generateTicket(this.user.ruc).subscribe(
       (res) => {
         this.generatedTicket(res.idp);
       },
-      (err) => {}
+      (err) => { }
     );
   }
 

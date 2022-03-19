@@ -14,7 +14,7 @@
                             class="text-center text-2xl text-greenEsmeraldLight tracking-tight leading-6 py-4 font-bold text-bvgPrimary">
                             Cola de Tickets Generados
                         </div>
-                        <div class="text-center px-4 sm:space-x-8 mt-4 sm:m-0">
+                        <!-- <div class="text-center px-4 sm:space-x-8 mt-4 sm:m-0">
                             <button
                                 mat-button
                                 class="bg-esmerald text-white text-base"
@@ -26,7 +26,7 @@
                                 ></mat-icon>
                                 <span class="">Nueva Compra</span>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Body Module -->
@@ -59,7 +59,7 @@
                                                 let i = index
                                             " [data-label]="'Código'">
                                             <!-- heroicons_outline:plus -->
-                                            <button type="button">
+                                            <button (click)="rejectedTicket(element.rmncode)" type="button">
                                                 <mat-icon class="mx-2 text-white hover:text-red-600" title="Descartar"
                                                     [svgIcon]="
                                                         'heroicons_outline:trash'

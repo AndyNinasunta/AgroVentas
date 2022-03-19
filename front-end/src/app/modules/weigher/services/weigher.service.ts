@@ -61,4 +61,14 @@ export class WeigherService {
       `${environment.urlAddress}/process/wPesaje`, body
     );
   }
+
+
+  discardTicket(id_ticket: string): Observable<any> {
+
+
+    return this.http.get<any>(
+      `${environment.urlAddress}/process/wInvalidateTicket?idticket=${id_ticket}`);
+  }
+
+
 }

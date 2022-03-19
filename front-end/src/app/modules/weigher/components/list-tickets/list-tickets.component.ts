@@ -8,6 +8,7 @@ import { TicketI } from '../../interfaces/weigher.interface';
 import * as Stomp from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
 import { WeigherService } from '../../services/weigher.service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-list-tickets',
@@ -90,6 +91,69 @@ export class ListTicketsComponent implements OnInit, AfterViewInit {
             `weigher/tickets/attend-ticket/${element.rmncode}`,
         ]);
     }
+
+
+    rejectedTicket(idTicket: string): void {
+        this.weigherService.discardTicket(idTicket).subscribe((res) => {
+            console.log(res);
+            this.showAlertResponse('200');
+        }, (err) => {
+            this.showAlertResponse('500');
+        });
+    }
+
+    /**
+    * Show Alert Response
+    * @param type 
+    * @param message 
+    */
+    showAlertResponse(type: string): void {
+
+        switch (type) {
+            // mensaje de exito	
+            case '200':
+
+                Swal.fire({
+                    position: 'center',
+                    width: "500px",
+                    icon: 'success',
+                    title: "Transacción realizada con éxito",//title: message,
+                    customClass: {
+                        popup: 'swal-border-popup',
+                        icon: 'swal-border-icon',
+                        title: 'swal-title',
+                    },
+                    showConfirmButton: false,
+                    timer: 3000,
+                });
+                this.getList();
+                break;
+
+            //mensaje de error 
+            case '500':
+
+                Swal.fire({
+                    position: 'center',
+                    width: "500px",
+                    icon: 'error',
+                    title: 'Ocurrió un Problema al ejecutar la transacción.',//title: message,
+                    customClass: {
+                        popup: 'swal-border-popup',
+                        icon: 'swal-border-icon',
+                        title: 'swal-title',
+                        //actions:'swal-button-confirm',
+                    },
+                    showConfirmButton: true,
+                    confirmButtonColor: '#22d3ee',
+                    //timer:3000,
+
+                });
+
+                break;
+
+        }
+    }
+
 
     /**
      * On destroy

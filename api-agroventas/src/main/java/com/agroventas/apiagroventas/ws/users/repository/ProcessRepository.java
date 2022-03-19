@@ -37,6 +37,6 @@ public interface ProcessRepository extends JpaRepository<RootEntity, Integer> {
     @Query(value = "SELECT * FROM fnanularticket(cast(:idticket as bigint))", nativeQuery = true)
     InvalidateTicketResponse invalidateTicket(@Param("idticket") String idticket);
 
-    @Query(value = "SELECT * FROM fnpaycash(:#{#pay.rmnid}, :#{#pay.cajero}, :#{#pay.payvalue})", nativeQuery = true)
+    @Query(value = "SELECT * FROM fnpaycash(cast(:#{#pay.rmnid} as bigint), cast(:#{#pay.cajero} as bigint), cast(:#{#pay.payvalue} as numeric), cast(:#{#pay.paymth} as integer))", nativeQuery = true)
     PayCashResponse payCash(@Param("pay") PayCashRequest pay);
 }

@@ -12,7 +12,8 @@ import java.math.BigInteger;
 @Getter
 @Setter
 public class PayCashRequest {
-    BigInteger rmnid;
-    BigInteger cajero;
+    int rmnid;
+    int cajero;
     float payvalue;
+    int paymth;
 }

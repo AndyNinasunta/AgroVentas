@@ -16,12 +16,14 @@ export class PayProductService {
 
   getListTicketsPendsPay(): Observable<any> {
     return this.http.get<any>(
-      environment.urlAddress + `/process/wPendTickets`);
+      environment.urlAddress + `/process/wWeighedTickets`);
   }
 
-  getOneTicketPendPay(): Observable<any> {
+  getOneTicketPendPay(idTicket: string): Observable<any> {
+
     return this.http.get<any>(
-      environment.urlAddress + `/process/wPendTickets`);
+      environment.urlAddress + `/process/wTicketDataPayment?idticket=${idTicket}`);
+
   }
 
   payProduct(body: PayCash): Observable<any> {

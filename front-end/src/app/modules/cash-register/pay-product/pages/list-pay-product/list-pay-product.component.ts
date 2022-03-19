@@ -4,7 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { PayProductComponent } from '../../components/pay-product/pay-product.component';
+import { TicketDataPayment } from '../../interfaces/pay-product.interface';
 import { PayProductService } from '../../services/pay-product.service';
 
 @Component({
@@ -22,23 +24,60 @@ export class ListPayProductComponent implements OnInit {
 
   ticketColumns: string[] = [
     'acciones',
-    'rmncode',
-    'idcl',
-    'cliente',
-    'fcrmn',
-    'hrrmn',
+    'tk',
+    'idnt',
+    'npers',
+    'fh',
+    'hr',
   ];
+
+
+
+  ticketDataPayment: TicketDataPayment[];
 
   constructor(private payProductService: PayProductService, private matDialog: MatDialog, private fBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
+
+    this.getList();
+
+
+
+  }
+
+  getList(): void {
+    this.payProductService.getListTicketsPendsPay()
+      .pipe(
+        takeUntil(this._unsubscribe),
+        finalize(() => {
+          this.isLoading = false;
+
+        })
+      )
+      .subscribe((res) => {
+
+        if (res) {
+          this.ticketDataPayment = res;
+          this.isLoading = false;
+          this.dataSource = new MatTableDataSource(this.ticketDataPayment);
+          this.dataSource.paginator = this.paginator;
+        }
+
+      },
+        (err) => {
+          console.log(err);
+        })
   }
 
 
-  openDialogPay(): void {
+  openDialogPay(id_ticket: string): void {
     const dialogDetail = this.matDialog.open(PayProductComponent, {
-      // data: data,
+      data: id_ticket,
       disableClose: false
+    }).componentInstance.action.subscribe((res) => {
+      if (res) {
+        this.getList();
+      }
     });
   }
 }

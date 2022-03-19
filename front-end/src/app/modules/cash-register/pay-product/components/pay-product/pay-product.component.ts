@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'app/core/auth/auth.service';
@@ -14,6 +14,8 @@ import { PayProductService } from '../../services/pay-product.service';
 export class PayProductComponent implements OnInit {
 
   payForm: FormGroup;
+
+  @Output() action = new EventEmitter<boolean>();
 
   formGroupError = new FormGroupError();
 
@@ -32,23 +34,39 @@ export class PayProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(this.userServ.user);
-
+    console.log(this.data);
     this.payForm = this.createProductForm();
+    this.getOnePayProduct();
+
+
   }
 
 
   createProductForm(): FormGroup {
     return this.fBuilder.group({
-      id_ticket: [{ value: '1', disabled: true }],
-      identificacion: [{ value: '1250599436', disabled: true }, [Validators.required]],
-      nombre: [{ value: 'Andy Ninasunt', disabled: true }, [Validators.required]],
-      peso: [{ value: '345', disabled: true }, [Validators.required]],
-      calificacion: [{ value: '245.45', disabled: true }, [Validators.required]],
-      total: [{ value: '3434', disabled: true }, [Validators.required]],
+      id_ticket: [{ value: '', disabled: true }],
+      identificacion: [{ value: '', disabled: true }, [Validators.required]],
+      nombre: [{ value: '', disabled: true }, [Validators.required]],
+      peso: [{ value: '', disabled: true }, [Validators.required]],
+      calificacion: [{ value: '', disabled: true }, [Validators.required]],
+      total: [{ value: '', disabled: true }, [Validators.required]],
       forma_pago: [{ value: '', disabled: false }, [Validators.required]],
     });
   }
 
+  getOnePayProduct(): void {
+    this.payProductService.getOneTicketPendPay(this.data)
+      .subscribe((res) => {
+        if (res) {
+          this.payForm.get('id_ticket').setValue(res.tk);
+          this.payForm.get('identificacion').setValue(res.idnt);
+          this.payForm.get('nombre').setValue(res.clt);
+          this.payForm.get('peso').setValue(res.pso);
+          this.payForm.get('calificacion').setValue(res.clf);
+          this.payForm.get('total').setValue(res.pago);
+        }
+      })
+  }
 
   payTicket(): void {
 
@@ -64,7 +82,7 @@ export class PayProductComponent implements OnInit {
       ((res) => {
         this.showAlertResponse('200');
         this.closeDialog();
-
+        this.action.emit(true);
       }, (err) => {
         this.showAlertResponse('500');
 

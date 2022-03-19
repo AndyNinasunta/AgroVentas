@@ -91,8 +91,8 @@
                                                         Seleccione
                                                     </mat-option>
 
-                                                    <mat-option (click)="setDescrTara(item.recipiente)" *ngFor="let item of recipientCombo"
-                                                        [value]="item.idRecipiente">
+                                                    <mat-option (click)="setDescrTara(item.recipiente)"
+                                                        *ngFor="let item of recipientCombo" [value]="item.idRecipiente">
                                                         {{item.recipiente}}
                                                     </mat-option>
                                                 </mat-select>
@@ -127,6 +127,10 @@
                                                     ">
                                             </mat-icon>
 
+                                            <mat-progress-spinner *ngIf="isLoadingWbSocket" [diameter]="20"
+                                                [mode]="'indeterminate'">
+                                            </mat-progress-spinner>
+
                                             <mat-error *ngIf=" this.productForm.get('libra_tara').invalid ">
                                                 {{
                                                 this.formGroupError.getErrorValidateMessage(
@@ -135,6 +139,7 @@
                                                 )
                                                 }}
                                             </mat-error>
+
                                         </mat-form-field>
                                     </div>
 
@@ -179,8 +184,8 @@
                 </div>
                 <!-- Footer -->
                 <div class="flex justify-center items-center p-6 space-x-2 rounded-b">
-                    <button (click)="saveProduct()" mat-flat-button type="submit" [disabled]="this.productForm.invalid"
-                        [color]="'primary'">
+                    <button (click)="saveProduct()" mat-flat-button type="submit"
+                        [disabled]="this.productForm.invalid || calf===undefined" [color]="'primary'">
                         <ng-container *ngIf="!isLoading">
                             <mat-icon class="mr-1" svgIcon="heroicons_outline:badge-check"></mat-icon>
                             <span>Agregar </span>

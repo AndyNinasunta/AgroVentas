@@ -224,12 +224,14 @@ export class AttendTicketComponent implements OnInit {
             .subscribe((res) => {
                 if (res) {
 
-                    if (res.varios_sacos) {
+                    this.pendTicketForm.get('calificacion').setValue(res.calf);
+
+                    if (res.prod.varios_sacos) {
                         for (let index = 0; index < res.cantidad_sacos; index++) {
 
-                            res.detalle = `${res.libra_tara} Libras de ${res.producto} ${this.variety} Recibido en ${res.tara_saco}`;
+                            res.detalle = `${res.libra_tara} Libras de ${res.prod.producto} ${this.variety} Recibido en ${res.prod.tara_saco}`;
 
-                            this.pesajeDetails.push(res);
+                            this.pesajeDetails.push(res.prod);
 
 
 
@@ -237,9 +239,9 @@ export class AttendTicketComponent implements OnInit {
 
                     } else {
 
-                        res.detalle = `${res.libra_tara} Libras de ${res.producto} ${this.variety} Recibido en ${res.tara_saco}`;
+                        res.detalle = `${res.prod.libra_tara} Libras de ${res.prod.producto} ${this.variety} Recibido en ${res.prod.tara_saco}`;
 
-                        this.pesajeDetails.push(res);
+                        this.pesajeDetails.push(res.prod);
 
                     }
 
@@ -247,13 +249,14 @@ export class AttendTicketComponent implements OnInit {
 
                 }
             });
+
     }
 
     /**
-* Show Alert Response
-* @param type 
-* @param message 
-*/
+    * Show Alert Response
+    * @param type 
+    * @param message 
+    */
     showAlertResponse(type: string): void {
 
         switch (type) {

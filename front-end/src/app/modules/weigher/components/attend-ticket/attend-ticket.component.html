@@ -404,7 +404,7 @@
                                                     </mat-label>
 
                                                     <input [formControlName]="'calificacion'" matInput value="0"
-                                                        type="text" />
+                                                        type="text" readonly />
 
                                                     <mat-icon matPrefix [svgIcon]="'heroicons_solid:clipboard-check'">
                                                     </mat-icon>
@@ -438,7 +438,7 @@
                     </ng-container>
                 </button>
                 <button type="button" mat-flat-button [color]="'warn'" (click)="goToPendTicket()">
-                    <ng-container >
+                    <ng-container>
                         <mat-icon class="mr-1" svgIcon="heroicons_outline:rewind"></mat-icon>
                         <span>Regresar </span>
                     </ng-container>

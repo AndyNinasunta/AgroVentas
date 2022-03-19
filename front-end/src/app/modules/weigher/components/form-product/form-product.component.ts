@@ -18,12 +18,16 @@ export class FormProductComponent implements OnInit {
   productForm: FormGroup;
 
   recipientCombo: RecipientI[];
-
+  calf: number;
   tara_saco: string;
 
-  @Output() productResponse: EventEmitter<PesajeDetalleI> = new EventEmitter<PesajeDetalleI>();
+  @Output() productResponse: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output() califEmition: EventEmitter<number> = new EventEmitter<number>();
 
   namePage: string = '';
+
+  isLoadingWbSocket: boolean = true;
 
   constructor(public matRef: MatDialogRef<FormProductComponent>,
     private fBuilder: FormBuilder,
@@ -58,9 +62,15 @@ export class FormProductComponent implements OnInit {
     setInterval(() => {
       this.weigherService.sensordata().subscribe((res) => {
         console.log(res);
-      });
+        if (res) {
+          this.productForm.get('libra_tara').setValue(Number(res.peso) * 2, 205);
+          this.calf = 434;
+        }
+      },
+        (err) => {
+          console.log('err');
+        });
     }, 3000);
-
   }
 
   getRecipient() {
@@ -84,7 +94,7 @@ export class FormProductComponent implements OnInit {
       producto: [{ value: 'Cacao', disabled: true }, [Validators.required]],
       cantidad: [{ value: '', disabled: false }, [Validators.required]],
       id_tara_saco: [{ value: '', disabled: false }, [Validators.required]],
-      libra_tara: [{ value: '', disabled: false }, [Validators.required]],
+      libra_tara: [{ value: '', disabled: true }, [Validators.required]],
       cantidad_sacos: [{ value: '', disabled: true }, [Validators.required]],
       varios_sacos: [{ value: false, disabled: false }],
     });
@@ -101,11 +111,12 @@ export class FormProductComponent implements OnInit {
 
     productAux.tara_saco = this.tara_saco;
     console.log(productAux);
-    this.productResponse.emit(productAux);
+    this.productResponse.emit({ prod: productAux, calf: this.calf });
     this.closeDialog();
   }
 
   closeDialog(): void {
     this.matRef.close();
   }
+
 }

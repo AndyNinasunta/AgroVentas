@@ -16,12 +16,6 @@
                         </div>
                     </div>
 
-                    <button (click)="openDialogPay()">
-
-                        PRUEBA
-
-                    </button>
-
                     <!-- Body Module -->
                 </div>
 
@@ -52,26 +46,24 @@
                                                 let i = index
                                             " [data-label]="'Código'">
                                             <!-- heroicons_outline:plus -->
-                                            <button type="button">
+                                            <!-- <button type="button">
                                                 <mat-icon class="mx-2 text-white hover:text-red-600" title="Descartar"
                                                     [svgIcon]="
                                                         'heroicons_outline:trash'
                                                     ">
                                                 </mat-icon>
-                                            </button>
+                                            </button> -->
 
                                             <button type="button" mat-icon-button (click)="
-                                                    openAttentionWindow(element)
+                                            openDialogPay(element.tk)
                                                 ">
-                                                <mat-icon class="mx-2 text-white" title="Atender" [svgIcon]="
-                                                        'heroicons_outline:clipboard-check'
-                                                    ">
-                                                </mat-icon>
+                                                <mat-icon class="mx-2 text-white" title="cobrar"
+                                                    svgIcon="mat_solid:payments"></mat-icon>
                                             </button>
                                         </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="rmncode">
+                                    <ng-container matColumnDef="tk">
                                         <th mat-header-cell *matHeaderCellDef
                                             class="px-2 text-white font-bold text-base text-center">
                                             COD. TICKET
@@ -81,15 +73,15 @@
                                                 <!-- <span
                                                     class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
                                                 <p class="truncate-text text-base text-white text-center" matTooltip="{{
-                                                        element.rmncode
+                                                        element.tk
                                                     }}">
-                                                    {{ element.rmncode }}
+                                                    {{ element.tk }}
                                                 </p>
                                             </div>
                                         </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="fcrmn">
+                                    <ng-container matColumnDef="fh">
                                         <th mat-header-cell *matHeaderCellDef
                                             class="px-2 text-white font-bold text-base text-center">
                                             Fecha
@@ -99,15 +91,15 @@
                                                 <!-- <span
                                                     class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
                                                 <p class="truncate-text text-base text-white text-center" matTooltip="{{
-                                                        element.fcrmn
+                                                        element.fh
                                                     }}">
-                                                    {{ element.fcrmn }}
+                                                    {{ element.fh }}
                                                 </p>
                                             </div>
                                         </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="hrrmn">
+                                    <ng-container matColumnDef="hr">
                                         <th mat-header-cell *matHeaderCellDef
                                             class="px-2 text-white font-bold text-base text-center">
                                             Hora
@@ -117,15 +109,15 @@
                                                 <!-- <span
                                                     class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
                                                 <p class="truncate-text text-base text-white text-center" matTooltip="{{
-                                                        element.hrrmn
+                                                        element.hr
                                                     }}">
-                                                    {{ element.hrrmn }}
+                                                    {{ element.hr }}
                                                 </p>
                                             </div>
                                         </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="idcl">
+                                    <ng-container matColumnDef="idnt">
                                         <th mat-header-cell *matHeaderCellDef
                                             class="px-2 text-white font-bold text-base text-center">
                                             ID. CLIENTE
@@ -135,15 +127,15 @@
                                                 <!-- <span
                                                     class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
                                                 <p class="truncate-text text-base text-white text-center" matTooltip="{{
-                                                        element.idcl
+                                                        element.idnt
                                                     }}">
-                                                    {{ element.idcl }}
+                                                    {{ element.idnt }}
                                                 </p>
                                             </div>
                                         </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="cliente">
+                                    <ng-container matColumnDef="npers">
                                         <th mat-header-cell *matHeaderCellDef
                                             class="px-2 text-white font-bold text-base text-center">
                                             NOMBS. CLIENTE
@@ -153,9 +145,9 @@
                                                 <!-- <span
                                                     class="column-label font-bold uppercase text-bvgBlue text-left sbvg:text-center">Id</span> -->
                                                 <p class="truncate-text text-base text-white text-center" matTooltip="{{
-                                                        element.cliente
+                                                        element.npers
                                                     }}">
-                                                    {{ element.cliente }}
+                                                    {{ element.npers }}
                                                 </p>
                                             </div>
                                         </td>

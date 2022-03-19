@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/api/v1/user")
 @CrossOrigin("*")
@@ -26,7 +28,7 @@ public class UserController {
     public ResponseEntity<Object> regUser(@RequestParam String NomR, @RequestParam String DirR, @RequestParam String RucR,
                                           @RequestParam String EmaR, @RequestParam String TelR){
         String validate = userService.verUser(RucR);
-        if(validate == "Registrar"){
+        if(Objects.equals(validate, "Registrar")){
             return new ResponseEntity<Object>(userService.regUser(NomR, DirR, RucR, EmaR, TelR), HttpStatus.valueOf(200));
         }
         return new ResponseEntity<Object>(validate, HttpStatus.valueOf(200));

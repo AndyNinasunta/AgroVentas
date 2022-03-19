@@ -24,6 +24,6 @@ public interface UserRepository extends JpaRepository<RootEntity, Integer> {
                                @Param("mail") String mail,
                                @Param("tel") String tel);
 
-    @Query(value = "SELECT * FROM fnObtenerDatosCliente(:idruc)", nativeQuery = true)
+    @Query(value = "SELECT * FROM fnObtenerDatosCliente(:idruc) LIMIT 1", nativeQuery = true)
     DataClienteResponse dataClient(@Param("idruc") String idruc);
 }

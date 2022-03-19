@@ -51,4 +51,19 @@ public class ProcessService {
         return processRepository.payCash(pay);
     }
 
+    public List<ListTicketsPayPendResponse> getWeighedTickets(){
+        return processRepository.getWeighedTickets();
+    }
+
+    public TicketDataPaymentResponse getTicketDataForPayment(String idticket){
+        return processRepository.getTicketDataForPayment(idticket);
+    }
+
+    public List<TicketsNotWeighedResponse> getNotWeighedTicketsByUser(String idnt){
+        return processRepository.getNotWeighedTicketsByUser(idnt);
+    }
+
+    public List<ListProcessedTicletsHistoryByUserResponse> getProcessedTicketsByUser(String idnt){
+        return processRepository.getProcessedTicketsByUser(idnt);
+    }
 }

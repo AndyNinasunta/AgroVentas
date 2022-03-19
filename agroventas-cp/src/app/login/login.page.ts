@@ -51,8 +51,7 @@ export class LoginPage implements OnInit {
         if (res) {
           this.showToast('Logged In');
           this.storage.remove('user');
-          this.storage.setUser(JSON.stringify(res));
-          //this.user = JSON.stringify(res);
+          this.storage.user = JSON.stringify(res);
           this.router.navigate(['app/tabs/new-ticket-tab']);
         } else {
           this.showToast('The user is not registered or it is inactive.');

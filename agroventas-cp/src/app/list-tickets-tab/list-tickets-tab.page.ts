@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import {
+  TicketNotWeighedI,
+  TicketWeighedI,
+  UserI,
+} from '../shared/interfaces/shared.interface';
 import { StorageService } from '../shared/storage.service';
+import { ListTicketsService } from './services/list-tickets.service';
 
 @Component({
   selector: 'app-list-tickets-tab',
@@ -8,18 +14,36 @@ import { StorageService } from '../shared/storage.service';
   styleUrls: ['./list-tickets-tab.page.scss'],
 })
 export class ListTicketsTabPage implements OnInit {
-  user = '';
-  $user = new BehaviorSubject<string>(this.user);
+  user: UserI = null;
+  $user = new BehaviorSubject<UserI>(this.user);
+  notWeighedTickets: TicketNotWeighedI[] = [];
+  weighedTickets: TicketWeighedI[] = [];
 
-  constructor(private storage: StorageService) {}
+  constructor(
+    private storage: StorageService,
+    private listTicketsService: ListTicketsService
+  ) {}
 
   ngOnInit() {
-    // this.storage.get('user').then((res) => {
-    //   this.user = res;
-    // });
-    this.storage.getUser().subscribe((user) => {
-      console.log(user);
-      this.user = user;
+    this.storage.get('user').then((user) => {
+      this.storage.user = user;
+      this.user = this.storage.user;
+
+      this.listTicketsService
+        .getNotWeighedItems(this.user.ruc)
+        .subscribe((nw) => {
+          this.notWeighedTickets = nw;
+        });
+
+      this.listTicketsService.getWeighedItems(this.user.ruc).subscribe((w) => {
+        this.weighedTickets = w;
+      });
     });
+  }
+
+  doRefresh(event) {
+    setTimeout(() => {
+      event.target.complete();
+    }, 3000);
   }
 }

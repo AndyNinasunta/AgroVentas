@@ -5,5 +5,46 @@
 </ion-header>
 
 <ion-content>
-  <div>{{user}}</div>
+  <ion-refresher slot="fixed" id="refresher" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-list-header color="light"> Not weighed tickets </ion-list-header>
+    <ng-container *ngIf="notWeighedTickets.length > 0">
+      <ion-item *ngFor="let element of notWeighedTickets">
+        <ion-label>
+          <h1>Ticket #: {{element.tickt}}</h1>
+          <h3>{{element.ingreso}}</h3>
+          <h3>{{element.estado}}</h3>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+
+    <ng-container *ngIf="notWeighedTickets.length <= 0">
+      <ion-item>
+        <ion-label>No data</ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+
+  <ion-list style="padding-top: 5px">
+    <ion-list-header color="light"> Processed tickets </ion-list-header>
+    <ng-container *ngIf="weighedTickets.length > 0">
+      <ion-item *ngFor="let element of weighedTickets">
+        <ion-label>
+          <h1>Ticket #: {{element.tickt}}</h1>
+          <h3>{{element.ingreso}}</h3>
+          <h3>{{element.estado}}</h3>
+          <h3>${{element.pago}}</h3>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+
+    <ng-container *ngIf="weighedTickets.length <= 0">
+      <ion-item>
+        <ion-label>No data</ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
 </ion-content>

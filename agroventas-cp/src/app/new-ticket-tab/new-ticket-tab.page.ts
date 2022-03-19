@@ -4,6 +4,8 @@ import { NewTicketTabService } from './services/new-ticket-tab.service';
 
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { Observable, Subscription } from 'rxjs';
+import { UserI } from '../shared/interfaces/shared.interface';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-new-ticket-tab',
@@ -11,41 +13,33 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   styleUrls: ['./new-ticket-tab.page.scss'],
 })
 export class NewTicketTabPage implements OnInit {
+  user: UserI;
+  userSubscription: Subscription;
 
-
-  u = '';
-
-  constructor(private newTicketService: NewTicketTabService, private storage: StorageService) { }
+  constructor(
+    private newTicketService: NewTicketTabService,
+    private storage: StorageService
+  ) {}
 
   ngOnInit() {
-    this.user.then((res) => {
-      this.u = res;
-    })
-    console.log(this.u);
+    this.user = this.storage.user;
+    // this.userSubscription = this.storage.user.subscribe((res) => {
+    //   this.user = res;
+    //   console.log(this.user, res);
+    // });
   }
-
-  get user(): Promise<any> {
-
-    return this.storage.get('user');
-  };
-
 
   generateTicket(): void {
     this.generateTicketServ();
   }
 
-
   generateTicketServ() {
-    this.newTicketService
-      .generateTicket('1250599436001')
-      .subscribe(
-        (res) => {
-
-          this.generatedTicket(res.idp);
-
-        },
-        (err) => { }
-      );
+    this.newTicketService.generateTicket('1250599436001').subscribe(
+      (res) => {
+        this.generatedTicket(res.idp);
+      },
+      (err) => {}
+    );
   }
 
   generatedTicket(queue: string) {
@@ -58,7 +52,7 @@ export class NewTicketTabPage implements OnInit {
       yyyy: now.getFullYear(),
     };
 
-    let dateNow: string =
+    const dateNow: string =
       formatoMap.dd + '/' + formatoMap.mm + '/' + formatoMap.yyyy;
 
     console.log(dateNow);
@@ -78,10 +72,7 @@ export class NewTicketTabPage implements OnInit {
           alignment: 'center',
         },
         {
-          text: [
-            'Bienvenido a AgroVentas!\n',
-            'Su número de cola es:\n',
-          ],
+          text: ['Bienvenido a AgroVentas!\n', 'Su número de cola es:\n'],
           style: 'body',
           bold: false,
           alignment: 'center',

@@ -5,23 +5,30 @@
 </ion-header>
 
 <ion-content>
-
   <ion-card class="md hydrated">
     <!-- <img src="./madison.jpg"> -->
     <ion-card-header class="ion-inherit-color md hydrated">
-      <ion-card-subtitle role="heading" aria-level="3" class="ion-inherit-color md hydrated">1250599436
+      <ion-card-subtitle
+        role="heading"
+        aria-level="3"
+        class="ion-inherit-color md hydrated"
+        >{{user.ruc}}
       </ion-card-subtitle>
-      <ion-card-title role="heading" aria-level="2" class="ion-inherit-color md hydrated">Andy Ninasunta
+      <ion-card-title
+        role="heading"
+        aria-level="2"
+        class="ion-inherit-color md hydrated"
+        >{{user.cliente}}
       </ion-card-title>
     </ion-card-header>
     <ion-card-content class="md card-content-md hydrated">
-      <ion-text color="primary">Tel:</ion-text> 0982736273 <br>
-      <ion-text color="primary">Email:</ion-text> andy2000-09@hotmail.com <br>
-      <ion-text color="primary">Dirección:</ion-text> DRIIRIDUIIDFJIDFGJDIFGJDIFGJDIFGJDFIGDJFIGJI, DFGID FG DFG, FFG
-      <ion-button expand="block" (click)="generateTicket()">Generate Ticket</ion-button>
-
+      <ion-text color="primary">Tel:</ion-text> {{user.telefono}} <br />
+      <ion-text color="primary">Email:</ion-text> {{user.mail}} <br />
+      <ion-text color="primary">Dirección:</ion-text>
+      {{user.direccion}}
+      <ion-button expand="block" (click)="generateTicket()"
+        >Generate Ticket</ion-button
+      >
     </ion-card-content>
   </ion-card>
-
-
 </ion-content>

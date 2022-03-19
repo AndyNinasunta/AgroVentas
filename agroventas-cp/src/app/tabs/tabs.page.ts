@@ -12,7 +12,7 @@ export class TabsPage implements OnInit {
   constructor(private router: Router, private storage: StorageService) {}
 
   ngOnInit(): void {
-    this.isLoggedIn();
+    //this.isLoggedIn();
   }
 
   toLogin() {
@@ -20,11 +20,9 @@ export class TabsPage implements OnInit {
     this.router.navigate(['']);
   }
 
-  async isLoggedIn() {
-    await this.storage.get('user').then((res) => {
-      if (!res) {
-        this.toLogin();
-      }
-    });
+  isLoggedIn() {
+    if (!this.storage.user) {
+      this.toLogin();
+    }
   }
 }

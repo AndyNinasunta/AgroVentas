@@ -44,7 +44,7 @@ public interface ProcessRepository extends JpaRepository<RootEntity, Integer> {
     List<ListTicketsPayPendResponse> getWeighedTickets();
 
     @Query(value = "SELECT * FROM fnpendientepagoticket(:idticket) LIMIT 1", nativeQuery = true)
-    TicketDataPaymentResponse getTicketDataForPayment(@Param("tickt") String idticket);
+    TicketDataPaymentResponse getTicketDataForPayment(@Param("idticket") String idticket);
 
     @Query(value = "SELECT * FROM fnnoatendidos(:idnt)", nativeQuery = true)
     List<TicketsNotWeighedResponse> getNotWeighedTicketsByUser(@Param("idnt") String idnt);
